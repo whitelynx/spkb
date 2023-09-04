@@ -1,11 +1,19 @@
-# Parameterized Key Tester Frame
+# SPKB
+
+_SolidPython-based Keyboard Builder_
 
 ![Action Shot](images/action-shot.jpg)
 
-This Python app allows you to generate `.scad` and `.stl` files for key tester frames, supporting
-arbitrary `m x n` sizes.
+A [SolidPython][]-based library for building custom keyboards with [Python][] and [OpenSCAD][].
 
-In the `files/` directory, example output files for 1x1, 2x2, 3x3, and 4x4 sizes are included.
+Some portions ported from Clojure, originally from [the Dactyl Keyboard][] and my fork thereof,
+[the Dactyl Lynx Keyboard][].
+
+[SolidPython]: https://github.com/jeff-dh/SolidPython
+[Python]: https://www.python.org/
+[OpenSCAD]: https://openscad.org/
+[the Dactyl Keyboard]: https://github.com/adereth/dactyl-keyboard
+[the Dactyl Lynx Keyboard]: https://github.com/whitelynx/dactyl-lynx-keyboard
 
 
 ## Prerequisites
@@ -24,23 +32,17 @@ This will install the following Python packages:
 
 ## Usage
 
-You can generate other sizes using the `src/generate.py` script; example:
-
-```bash
-src/generate.py 3 5 --output ~/key-tester-3x5.scad
+```python
+import * from spkb
 ```
 
-Once you have generated a `.scad` file, you can use OpenSCAD to generate a `.stl` file from it:
-
-```bash
-openscad -o ~/key-tester-3x5.stl ~/key-tester-3x5.scad
-```
+See the example scripts in the `examples/` directory.
 
 
 ## Links
 
-* [Hackaday.io](https://hackaday.io/project/176329-parameterized-key-tester-frame)
-* [Thingiverse](https://www.thingiverse.com/thing:4685209)
+* [parametric-key-tester](https://github.com/whitelynx/parametric-key-tester) - the original project this library was forked from
+* [the Dactyl Keyboard][] and my fork, [the Dactyl Lynx Keyboard][] - original switch sockets, layout logic, etc.
 
 
 ## License
