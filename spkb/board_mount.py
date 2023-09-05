@@ -1,6 +1,6 @@
 from solid2 import rotate, cube, hull, scad_render_to_file, up, left, right, forward, back
 
-from utils import cylinder_outer, optional
+from .utils import cylinder_outer, optional
 
 
 SEGMENTS = 48

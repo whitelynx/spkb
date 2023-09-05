@@ -20,6 +20,8 @@ cherry_backplate_clearance_distance = 3.5
 
 
 def mx_plate():
+    """Build a segment of plate for an MX-compatible switch.
+    """
     top_wall = forward((1.5 + keyswitch_length) / 2)(
         up(plate_thickness / 2)(
             cube((keyswitch_width + 3, 1.5, plate_thickness), center=True)

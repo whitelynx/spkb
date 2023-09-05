@@ -1,6 +1,6 @@
 from solid2 import rotate, cube, up, left, right, forward, back
 
-from switch_plate import (
+from .switch_plate import (
     switch_plate,
     keyswitch_depth,
     plate_thickness,
