@@ -16,6 +16,10 @@ classifiers = [
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
 ]
+license = {file = "LICENSE"}
+dependencies = {
+	"solidpython2",
+}
 
 [project.urls]
 "Homepage" = "https://github.com/whitelynx/spkb"
