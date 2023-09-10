@@ -5,7 +5,7 @@ from .switch_plate import (
     keyswitch_depth,
     plate_thickness,
     mount_width,
-    mount_height,
+    mount_length,
 )
 
 
@@ -14,13 +14,13 @@ SEGMENTS = 48
 switch_spacing = 10
 
 wall_height = keyswitch_depth + 15
-wall_length = max(mount_width, mount_height) + 2 * switch_spacing
+wall_length = max(mount_width, mount_length) + 2 * switch_spacing
 wall_thickness = 5
 
 
 def spaced_switch_plate():
     plate_spacer = up(plate_thickness / 2)(
-        forward((max(mount_width, mount_height) + switch_spacing) / 2)(
+        forward((max(mount_width, mount_length) + switch_spacing) / 2)(
             cube((wall_length, switch_spacing, plate_thickness), center=True)
         )
     )
