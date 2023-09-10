@@ -42,7 +42,7 @@ See the example scripts in the `examples/` directory.
 ## Links
 
 * [parametric-key-tester](https://github.com/whitelynx/parametric-key-tester) - the original project this library was forked from
-* [the Dactyl Keyboard][] and my fork, [the Dactyl Lynx Keyboard][] - original switch sockets, etc.
+* [the Dactyl Keyboard][] and my fork, [the Dactyl Lynx Keyboard][] - original switch sockets, keycap approximations, etc.
 
 
 ## License
