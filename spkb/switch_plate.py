@@ -11,6 +11,7 @@ plate_thickness = 3
 notch_plate_thickness = 1.3  # The thickness of the plate at the notches where the switch's clips are located
 notch_width = 5
 notch_depth = 0.5
+notch_height = 2
 backplate_thickness = 1.25
 backplate_orientation = 180
 mount_width = keyswitch_width + 3
@@ -19,23 +20,23 @@ mount_length = keyswitch_length + 3
 cherry_backplate_clearance_distance = 3.5
 
 
-def mx_plate():
+def mx_plate(full_depth=False):
     """Build a segment of plate for an MX-compatible switch.
     """
     top_wall = forward((1.5 + keyswitch_length) / 2)(
-        up(plate_thickness / 2)(
-            cube((keyswitch_width + 3, 1.5, plate_thickness), center=True)
-            - down(notch_plate_thickness)(  # Notch for switch clips
-                back(0.75)(
-                    cube((notch_width, notch_depth * 2, plate_thickness), center=True)
-                )
+        up(plate_thickness - keyswitch_depth / 2 if full_depth else plate_thickness / 2)(
+            cube((keyswitch_width + 3, 1.5, keyswitch_depth if full_depth else plate_thickness), center=True)
+        )
+        - down(notch_plate_thickness + notch_height / 2 - plate_thickness)(  # Notch for switch clips
+            back(0.75)(
+                cube((notch_width, notch_depth * 2, notch_height), center=True)
             )
         )
     )
 
     left_wall = left((1.5 + keyswitch_width) / 2)(
-        up(plate_thickness / 2)(
-            cube((1.5, keyswitch_length + 3, plate_thickness), center=True)
+        up(plate_thickness - keyswitch_depth / 2 if full_depth else plate_thickness / 2)(
+            cube((1.5, keyswitch_length + 3, keyswitch_depth if full_depth else plate_thickness), center=True)
         )
     )
 
@@ -74,7 +75,7 @@ def mx_backplate_clearance():
 
 
 def mx_plate_with_backplate():
-    return mx_plate() + mx_backplate()
+    return mx_plate(full_depth=True) + mx_backplate()
 
 
 switch_plate = mx_plate
