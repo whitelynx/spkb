@@ -45,19 +45,19 @@ def mx_plate():
 
 
 def mx_backplate():
-    return down(plate_thickness - keyswitch_depth - backplate_thickness / 2)(
+    return up(plate_thickness - keyswitch_depth - backplate_thickness / 2)(
         rotate(backplate_orientation, [0, 0, 1])(
-            cube((keyswitch_width + 3, keyswitch_length + 3, backplate_thickness))
+            cube((keyswitch_width + 3, keyswitch_length + 3, backplate_thickness), center=True)
             - (
-                cylinder(r=1.9939, h=backplate_thickness + 1, _fs=0.5)
-                + right(5.08)(cylinder(r=0.8509, h=backplate_thickness + 1, _fs=0.5))
-                + left(5.08)(cylinder(r=0.8509, h=backplate_thickness + 1, _fs=0.5))
-                + left(3.81)(forward(2.54)(cylinder(r=1.5, h=backplate_thickness + 1, _fs=0.5)))
-                + right(2.54)(forward(5.08)(cylinder(r=1.5, h=backplate_thickness + 1, _fs=0.5)))
-                + right(1.27)(back(5.08)(cylinder(r=0.4953, h=backplate_thickness + 1, _fs=0.5)))
-                + left(1.27)(back(5.08)(cylinder(r=0.4953, h=backplate_thickness + 1, _fs=0.5)))
-                + right(3.81)(back(5.08)(cylinder(r=0.4953, h=backplate_thickness + 1, _fs=0.5)))
-                + left(3.81)(back(5.08)(cylinder(r=0.4953, h=backplate_thickness + 1, _fs=0.5)))
+                cylinder(r=1.9939, h=backplate_thickness + 1, center=True, _fn=16)
+                + right(5.08)(cylinder(r=0.8509, h=backplate_thickness + 1, center=True, _fn=16))
+                + left(5.08)(cylinder(r=0.8509, h=backplate_thickness + 1, center=True, _fn=16))
+                + left(3.81)(forward(2.54)(cylinder(r=1.5, h=backplate_thickness + 1, center=True, _fn=16)))
+                + right(2.54)(forward(5.08)(cylinder(r=1.5, h=backplate_thickness + 1, center=True, _fn=16)))
+                + right(1.27)(back(5.08)(cylinder(r=0.4953, h=backplate_thickness + 1, center=True, _fn=16)))
+                + left(1.27)(back(5.08)(cylinder(r=0.4953, h=backplate_thickness + 1, center=True, _fn=16)))
+                + right(3.81)(back(5.08)(cylinder(r=0.4953, h=backplate_thickness + 1, center=True, _fn=16)))
+                + left(3.81)(back(5.08)(cylinder(r=0.4953, h=backplate_thickness + 1, center=True, _fn=16)))
             )
         )
     )
@@ -74,7 +74,7 @@ def mx_backplate_clearance():
 
 
 def mx_plate_with_backplate():
-    return mx_plate + mx_backplate
+    return mx_plate() + mx_backplate()
 
 
 switch_plate = mx_plate
