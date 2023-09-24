@@ -68,7 +68,12 @@ class BoardMount:
         )
         # TODO: Maybe add pin clearance!
 
-    def mounting_posts(self, distance_from_surface):
+    def back_mounting_posts(self, distance_from_surface):
+        return back(self.board_length + m2_shaft_radius + FUDGE)(
+            mount_post_m2(distance_from_surface)
+        )
+
+    def front_mounting_posts(self, distance_from_surface):
         positioning_post_height = distance_from_surface + self.board_thickness + 3
         positioning_post = forward(1)(
             up(positioning_post_height / 2)(
@@ -77,11 +82,14 @@ class BoardMount:
         )
 
         return (
-            back(self.board_length + m2_shaft_radius + FUDGE)(
-                mount_post_m2(distance_from_surface)
-            )
-            + left(7)(positioning_post)
+            left(7)(positioning_post)
             + right(7)(positioning_post)
+        )
+
+    def mounting_posts(self, distance_from_surface):
+        return (
+            self.back_mounting_posts(distance_from_surface)
+            + self.front_mounting_posts(distance_from_surface)
         )
 
     def render(self, distance_from_surface):
