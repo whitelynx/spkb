@@ -1,6 +1,6 @@
 from solid2 import rotate, cube, hull, scad_render_to_file, up, left, right, forward, back
 
-from utils import cylinder_outer, optional
+from .utils import cylinder_outer, optional
 
 
 SEGMENTS = 48
@@ -119,15 +119,3 @@ class BoardMount:
 
 pro_micro = BoardMount(18.3, 33.1, 1.7)
 stm32_blackpill = BoardMount(20.66, 53, 1.64, back_mounting_post_separation=11)
-
-
-if __name__ == "__main__":
-    board = stm32_blackpill
-
-    (
-        board.render(5).color((0.2, 0.2, 0.2))
-        + up(20)(
-            board.render(5).color((0.2, 0.2, 0.2))
-            + board.board_profile(5).color((0.0, 0.4, 0.0))
-        )
-    ).save_as_scad()
