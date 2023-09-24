@@ -73,18 +73,18 @@ class BoardMount:
             mount_post_m2(distance_from_surface)
         )
 
-    def front_mounting_posts(self, distance_from_surface):
+    def front_mounting_posts(self, distance_from_surface, separation=10):
         positioning_post_height = distance_from_surface + self.board_thickness + 3
-        positioning_post = forward(1)(
-            up(positioning_post_height / 2)(
-                cube((4, 4, positioning_post_height), center=True)
-            )
-        )
+        positioning_post = cube((4, 4, positioning_post_height), center=True) \
+            .up(positioning_post_height / 2) \
+            .forward(1)
+
+        positioning_post_shift = 2 + separation / 2
 
         return (
-            left(7)(positioning_post)
-            + right(7)(positioning_post)
-        )
+            left(positioning_post_shift)(positioning_post)
+            + right(positioning_post_shift)(positioning_post)
+        ) - self.board_profile(distance_from_surface)
 
     def mounting_posts(self, distance_from_surface):
         return (
