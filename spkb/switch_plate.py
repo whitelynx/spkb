@@ -87,7 +87,14 @@ def mx_plate_with_backplate():
 switch_plate = mx_plate
 
 
+# To test, use the command line: pipenv run python -m spkb.switch_plate
 if __name__ == "__main__":
+    print("Rendering mx_plate() to mx_plate.scad...")
     scad_render_to_file(
-        switch_plate(), file_header=f"$fn = {SEGMENTS};"
+        mx_plate(), filename="mx_plate.scad", file_header=f"$fn = {SEGMENTS};"
+    )
+
+    print("Rendering mx_plate_with_backplate() to mx_plate_with_backplate.scad...")
+    scad_render_to_file(
+        mx_plate_with_backplate(), filename="mx_plate_with_backplate.scad", file_header=f"$fn = {SEGMENTS};"
     )
