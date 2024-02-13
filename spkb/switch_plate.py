@@ -1,4 +1,4 @@
-from solid2 import cube, cylinder, mirror, rotate, up, down, left, right, forward, back, scad_render_to_file
+from solid2 import cube, cylinder, hull, mirror, rotate, up, down, left, right, forward, back, scad_render_to_file
 
 
 SEGMENTS = 48
@@ -10,8 +10,10 @@ keyswitch_depth = 5.08  # From the base of the switch to the mounting plate face
 plate_thickness = 3
 notch_plate_thickness = 1.3  # The thickness of the plate at the notches where the switch's clips are located
 notch_width = 5
+notch_width_outer = 6
 notch_depth = 0.5
-notch_height = 2
+notch_height = 8
+notch_height_outer = 9
 backplate_thickness = 1.25
 backplate_orientation = 180
 mount_width = keyswitch_width + 3
@@ -30,7 +32,12 @@ def mx_plate(full_depth=False, extra_depth=0):
         )
         - down(notch_plate_thickness + notch_height / 2 - plate_thickness)(  # Notch for switch clips
             back(0.75)(
-                cube((notch_width, notch_depth * 2, notch_height), center=True)
+                hull()(
+                    cube((notch_width, notch_depth * 2, notch_height), center=True),
+                    back(notch_depth)(
+                        cube((notch_width_outer, notch_depth * 2, notch_height_outer), center=True)
+                    )
+                )
             )
         )
     )
