@@ -89,5 +89,5 @@ switch_plate = mx_plate
 
 if __name__ == "__main__":
     scad_render_to_file(
-        switch_plate(), file_header=f"$fn = {SEGMENTS};", include_orig_code=True
+        switch_plate(), file_header=f"$fn = {SEGMENTS};"
     )
