@@ -22,16 +22,16 @@ mount_length = keyswitch_length + 3
 cherry_backplate_clearance_distance = 3.5
 
 
-def mx_plate(full_depth=False, extra_depth=0):
+def mx_plate(full_depth=False, extra_depth=0, wall_thickness=1.5):
     """Build a segment of plate for an MX-compatible switch.
     """
     thickness = (keyswitch_depth if full_depth else plate_thickness) + extra_depth
-    top_wall = forward((1.5 + keyswitch_length) / 2)(
+    top_wall = forward((wall_thickness + keyswitch_length) / 2)(
         up(plate_thickness - thickness / 2)(
-            cube((keyswitch_width + 3, 1.5, thickness), center=True)
+            cube((keyswitch_width + wall_thickness * 2, wall_thickness, thickness), center=True)
         )
         - down(notch_plate_thickness + notch_height / 2 - plate_thickness)(  # Notch for switch clips
-            back(0.75)(
+            back(wall_thickness / 2)(
                 hull()(
                     cube((notch_width, notch_depth * 2, notch_height), center=True),
                     back(notch_depth)(
@@ -42,15 +42,34 @@ def mx_plate(full_depth=False, extra_depth=0):
         )
     )
 
-    left_wall = left((1.5 + keyswitch_width) / 2)(
+    left_wall = left((wall_thickness + keyswitch_width) / 2)(
         up(plate_thickness - thickness / 2)(
-            cube((1.5, keyswitch_length + 3, thickness), center=True)
+            cube((wall_thickness, keyswitch_length + wall_thickness * 2, thickness), center=True)
         )
     )
 
     plate_half = top_wall + left_wall
 
     return plate_half + mirror((0, 1, 0))(mirror((1, 0, 0))(plate_half))
+
+
+def mx_plate_with_board_mount(full_depth=False, extra_depth=0):
+    """Build a segment of plate for an MX-compatible switch, with mounting holes for a single-key PCB.
+
+    Some compatible single-key PCBs:
+    - https://www.flux.ai/whitelynx/mx-single-keyswitch-hot-swap-board
+    """
+    screw_hole = down(keyswitch_depth / 2)(
+        cylinder(r=0.5, h=keyswitch_depth + plate_thickness / 2, center=True, _fn=16)
+    )
+
+    return (
+        mx_plate(full_depth=True, wall_thickness=2.625)
+        - forward(8)(right(8)(screw_hole))
+        - forward(8)(left(8)(screw_hole))
+        - back(8)(right(8)(screw_hole))
+        - back(8)(left(8)(screw_hole))
+    )
 
 
 def mx_backplate():
@@ -81,6 +100,8 @@ def mx_backplate_clearance():
 
 
 def mx_plate_with_backplate():
+    """Build a segment of plate for an MX-compatible switch, with a backplate capable of holding a hot-swap socket.
+    """
     return mx_plate(full_depth=True, extra_depth=1) + mx_backplate()
 
 
@@ -97,4 +118,9 @@ if __name__ == "__main__":
     print("Rendering mx_plate_with_backplate() to mx_plate_with_backplate.scad...")
     scad_render_to_file(
         mx_plate_with_backplate(), filename="mx_plate_with_backplate.scad", file_header=f"$fn = {SEGMENTS};"
+    )
+
+    print("Rendering mx_plate_with_board_mount() to mx_plate_with_board_mount.scad...")
+    scad_render_to_file(
+        mx_plate_with_board_mount(), filename="mx_plate_with_board_mount.scad", file_header=f"$fn = {SEGMENTS};"
     )
