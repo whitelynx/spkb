@@ -52,11 +52,11 @@ class BoardMount:
         """
         return optional(self.has_connector)(
             up(distance_from_surface - 1.25)(
-                forward(self.plug_offset + 0.01)(
+                forward(self.plug_offset + 0.1)(
                     rotate((90, 0, 0))(
                         hull()(
-                            left(4 - 1.25)(cylinder_outer(2.5 / 2, 6.02)),
-                            right(4 - 1.25)(cylinder_outer(2.5 / 2, 6.02)),
+                            left(4 - 1.25)(cylinder_outer(2.5 / 2, 6.2)),
+                            right(4 - 1.25)(cylinder_outer(2.5 / 2, 6.2)),
                         )
                     )
                 )
