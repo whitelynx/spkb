@@ -58,6 +58,7 @@ def mx_plate_with_board_mount(full_depth=False, extra_depth=0):
 
     Some compatible single-key PCBs:
     - https://www.flux.ai/whitelynx/mx-single-keyswitch-hot-swap-board
+    - https://www.flux.ai/whitelynx/choc-single-keyswitch-hot-swap-board
     """
     screw_hole = down(keyswitch_depth / 2)(
         cylinder(r=0.5, h=keyswitch_depth + plate_thickness / 2, center=True, _fn=16)
