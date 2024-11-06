@@ -18,18 +18,6 @@ Some portions ported from Clojure, originally from [the Dactyl Keyboard][] and m
 
 ## Prerequisites
 
-You can install prerequisites with `pip`:
-
-```bash
-pip install -r requirements.txt
-```
-
-
-This will install the following Python packages:
-
-- [solidpython2](https://github.com/jeff-dh/SolidPython)
-## Prerequisites
-
 * [Python][] version 3.11 or newer
 * [pipenv](https://pipenv.pypa.io/en/latest/)
 
@@ -38,6 +26,7 @@ This will install the following Python packages:
 ```bash
 pipenv install
 ```
+
 
 ## Usage
 
@@ -62,6 +51,7 @@ from spkb.board_mount import stm32_blackpill
 from spkb.keycaps import sa_double_length, sa_cap
 ```
 
+
 ## Testing
 
 You can run simple tests from some of the submodules:
@@ -71,6 +61,7 @@ pipenv run python -m spkb.switch_plate  # Renders a variety of keyswitch plates 
 pipenv run python -m spkb.keycaps       # Renders the built-in keycap approximations
 pipenv run python -m spkb.single_tester # Renders a single-key tester
 ```
+
 
 ## Links
 
