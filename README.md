@@ -39,16 +39,6 @@ This will install the following Python packages:
 pipenv install
 ```
 
-## Testing
-
-You can run simple tests from some of the submodules:
-
-```bash
-pipenv run python -m spkb.switch_plate  # Renders a variety of keyswitch plates (sockets)
-pipenv run python -m spkb.keycaps       # Renders the built-in keycap approximations
-pipenv run python -m spkb.single_tester # Renders a single-key tester
-```
-
 ## Usage
 
 For simply generating interesting key testers, see the example scripts in the `examples/`
@@ -70,6 +60,16 @@ aren't re-exported by the top-level module:
 from spkb.switch_plate import plate_thickness, mx_plate
 from spkb.board_mount import stm32_blackpill
 from spkb.keycaps import sa_double_length, sa_cap
+```
+
+## Testing
+
+You can run simple tests from some of the submodules:
+
+```bash
+pipenv run python -m spkb.switch_plate  # Renders a variety of keyswitch plates (sockets)
+pipenv run python -m spkb.keycaps       # Renders the built-in keycap approximations
+pipenv run python -m spkb.single_tester # Renders a single-key tester
 ```
 
 ## Links
