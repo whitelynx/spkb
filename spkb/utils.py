@@ -4,6 +4,22 @@ from math import pi, cos
 from solid2 import cube, cylinder
 
 
+def fudge_radius(r, segments=16):
+    """Adjust the given radius for the given number of segments to make it generate a circumscribed circular object.
+
+    See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/undersized_circular_objects for more info.
+
+    :param r: The radius of both top and bottom ends of the cylinder. Use this
+    parameter if you want plain cylinder. Default value is 1.
+    :type r: number
+
+    :param segments: Number of fragments in 360 degrees.
+    :type segments: int
+    """
+    fudge = 1 / cos(pi / segments)
+    return [ri * fudge for ri in r] if isinstance(r, Sequence) else r * fudge
+
+
 def cylinder_outer(r, h, segments=16, center=False):
     """Create a cylinder using circumscribed polygons instead of the default inscribed polygons.
 
@@ -24,8 +40,7 @@ def cylinder_outer(r, h, segments=16, center=False):
     of cone at the origin.
     :type center: boolean
     """
-    fudge = 1 / cos(pi / segments)
-    adjusted_r = [ri * fudge for ri in r] if isinstance(r, Sequence) else r * fudge
+    adjusted_r = fudge_radius(r, segments)
 
     return cylinder(h=h, r=adjusted_r, _fn=segments, center=center)
 
