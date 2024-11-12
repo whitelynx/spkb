@@ -4,7 +4,10 @@ from spkb.switch_plate import plate_thickness
 
 
 sa_length = 18.25
+sa_1_5_length = 28
 sa_double_length = 37.5
+sa_mid_shrink = 0.625
+sa_top_shrink = 3.125
 
 
 def sa_cap(units):
@@ -16,16 +19,17 @@ def sa_cap(units):
     :type units: number
     """
     if units == 1:
-        bl2 = 18.5 / 2
-        m = 17 / 2
+        bl2 = sa_length / 2
+        ml2 = sa_length / 2 - sa_mid_shrink
+        tl2 = sa_length / 2 - sa_top_shrink
         key_cap = hull()(
             polygon(((bl2, bl2), (bl2, -bl2), (-bl2, -bl2), (-bl2, bl2)))
             .linear_extrude(height=0.1, twist=0, convexity=0)
             .translate((0, 0, 0.05)),
-            polygon(((m, m), (m, -m), (-m, -m), (-m, m)))
+            polygon(((ml2, ml2), (ml2, -ml2), (-ml2, -ml2), (-ml2, ml2)))
             .linear_extrude(height=0.1, twist=0, convexity=0)
             .translate((0, 0, 6)),
-            polygon(((6, 6), (6, -6), (-6, -6), (-6, 6)))
+            polygon(((tl2, tl2), (tl2, -tl2), (-tl2, -tl2), (-tl2, tl2)))
             .linear_extrude(height=0.1, twist=0, convexity=0)
             .translate((0, 0, 12)),
         )
@@ -37,12 +41,19 @@ def sa_cap(units):
 
     elif units == 2:
         bl2 = sa_double_length / 2
-        bw2 = 18.25 / 2
+        bw2 = sa_length / 2
+        ml2 = sa_double_length / 2 - sa_mid_shrink
+        mw2 = sa_length / 2 - sa_mid_shrink
+        tl2 = sa_double_length / 2 - sa_top_shrink
+        tw2 = sa_length / 2 - sa_top_shrink
         key_cap = hull()(
             polygon(((bw2, bl2), (bw2, -bl2), (-bw2, -bl2), (-bw2, bl2)))
             .linear_extrude(height=0.1, twist=0, convexity=0)
             .translate((0, 0, 0.05)),
-            polygon(((6, 16), (6, -16), (-6, -16), (-6, 16)))
+            polygon(((mw2, ml2), (mw2, -ml2), (-mw2, -ml2), (-mw2, ml2)))
+            .linear_extrude(height=0.1, twist=0, convexity=0)
+            .translate((0, 0, 6)),
+            polygon(((tw2, tl2), (tw2, -tl2), (-tw2, -tl2), (-tw2, tl2)))
             .linear_extrude(height=0.1, twist=0, convexity=0)
             .translate((0, 0, 12)),
         )
@@ -53,13 +64,20 @@ def sa_cap(units):
         )
 
     elif units == 1.5:
-        bl2 = 18.25 / 2
-        bw2 = 28 / 2
+        bl2 = sa_1_5_length / 2
+        bw2 = sa_length / 2
+        ml2 = sa_1_5_length / 2 - sa_mid_shrink
+        mw2 = sa_length / 2 - sa_mid_shrink
+        tl2 = sa_1_5_length / 2 - sa_top_shrink
+        tw2 = sa_length / 2 - sa_top_shrink
         key_cap = hull()(
             polygon(((bw2, bl2), (bw2, -bl2), (-bw2, -bl2), (-bw2, bl2)))
             .linear_extrude(height=0.1, twist=0, convexity=0)
             .translate((0, 0, 0.05)),
-            polygon(((11, 6), (-11, 6), (-11, -6), (11, -6)))
+            polygon(((mw2, ml2), (mw2, -ml2), (-mw2, -ml2), (-mw2, ml2)))
+            .linear_extrude(height=0.1, twist=0, convexity=0)
+            .translate((0, 0, 6)),
+            polygon(((tw2, tl2), (tw2, -tl2), (-tw2, -tl2), (-tw2, tl2)))
             .linear_extrude(height=0.1, twist=0, convexity=0)
             .translate((0, 0, 12)),
         )
