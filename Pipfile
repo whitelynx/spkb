@@ -8,3 +8,4 @@ solidpython2 = "==2.*"
 
 [dev-packages]
 flake8 = "*"
+pyright = "*"
