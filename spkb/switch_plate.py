@@ -22,6 +22,9 @@ mount_length = keyswitch_length + 3
 cherry_backplate_clearance_distance = 3.5
 
 
+# TODO: Turn keyswitch plate functions into callable classes that also have important measurements exposed as props.
+
+
 def mx_plate(full_depth=False, extra_depth=0, wall_thickness=1.5):
     """Build a segment of plate for an MX-compatible switch.
     """
