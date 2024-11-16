@@ -42,7 +42,18 @@ def cylinder_outer(r, h, segments=16, center=False):
     """
     adjusted_r = fudge_radius(r, segments)
 
-    return cylinder(h=h, r=adjusted_r, _fn=segments, center=center)
+    radii = {}
+    if isinstance(adjusted_r, float):
+        radii['r'] = adjusted_r
+    elif isinstance(adjusted_r, (tuple, list)):
+        radii['r1'], radii['r2'] = adjusted_r
+
+    return cylinder(
+        h=h,
+        _fn=segments,
+        center=center,
+        **radii,
+    )
 
 
 """Nothing. (a completely empty shape)

@@ -81,6 +81,7 @@ class BoardMount:
     def back_mounting_posts(self, distance_from_surface):
         mounting_post = mount_post_m2(distance_from_surface)
 
+        mounting_post_shift = mount_post_m2_radius * 2
         if self.back_mounting_post_separation is not None:
             mounting_post_shift = mount_post_m2_radius + self.back_mounting_post_separation / 2
 

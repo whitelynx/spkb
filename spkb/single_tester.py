@@ -52,5 +52,5 @@ def single_tester():
 
 if __name__ == "__main__":
     scad_render_to_file(
-        single_tester(), file_header=f"$fn = {SEGMENTS};", include_orig_code=True
+        single_tester(), file_header=f"$fn = {SEGMENTS};",
     )
