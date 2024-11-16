@@ -23,9 +23,7 @@ def mx_keyswitch():
     )
 
 
-# To test, use the command line: pipenv run python -m spkb.single_key_pcb
+# To test, use the command line: pipenv run python -m spkb.keyswitch
 if __name__ == "__main__":
-    print("Rendering single_key_board() to single_key_board.scad...")
-    scad_render_to_file(
-        single_key_board(), filename="single_key_board.scad", file_header=f"$fn = {SEGMENTS};"
-    )
+    print("Rendering mx_keyswitch() to mx_keyswitch.scad...")
+    mx_keyswitch().save_as_scad("mx_keyswitch.scad")
