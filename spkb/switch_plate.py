@@ -1,4 +1,5 @@
 from solid2 import cube, cylinder, hull, mirror, rotate, up, down, left, right, forward, back, scad_render_to_file
+from solid2.core.object_base import OpenSCADObject
 
 
 SEGMENTS = 48
@@ -25,7 +26,7 @@ cherry_backplate_clearance_distance = 3.5
 # TODO: Turn keyswitch plate functions into callable classes that also have important measurements exposed as props.
 
 
-def mx_plate(full_depth=False, extra_depth=0, wall_thickness=1.5):
+def mx_plate(full_depth: bool = False, extra_depth: float = 0, wall_thickness: float = 1.5) -> OpenSCADObject:
     """Build a segment of plate for an MX-compatible switch.
     """
     thickness = (keyswitch_depth if full_depth else plate_thickness) + extra_depth
@@ -56,7 +57,7 @@ def mx_plate(full_depth=False, extra_depth=0, wall_thickness=1.5):
     return plate_half + mirror((0, 1, 0))(mirror((1, 0, 0))(plate_half))
 
 
-def mx_plate_with_board_mount(full_depth=False, extra_depth=0):
+def mx_plate_with_board_mount(full_depth: bool = False, extra_depth: float = 0) -> OpenSCADObject:
     """Build a segment of plate for an MX-compatible switch, with mounting holes for a single-key PCB.
 
     Some compatible single-key PCBs:
@@ -76,7 +77,7 @@ def mx_plate_with_board_mount(full_depth=False, extra_depth=0):
     )
 
 
-def mx_backplate():
+def mx_backplate() -> OpenSCADObject:
     return up(plate_thickness - keyswitch_depth - backplate_thickness / 2)(
         rotate(backplate_orientation, [0, 0, 1])(
             cube((keyswitch_width + 3, keyswitch_length + 3, backplate_thickness), center=True)
@@ -93,7 +94,7 @@ def mx_backplate():
     )
 
 
-def mx_backplate_clearance():
+def mx_backplate_clearance() -> OpenSCADObject:
     return back(-7.5 / 2)(
         up(plate_thickness - keyswitch_depth - backplate_thickness - cherry_backplate_clearance_distance / 2)(
             rotate(backplate_orientation, [0, 0, 1])(
@@ -103,7 +104,7 @@ def mx_backplate_clearance():
     )
 
 
-def mx_plate_with_backplate():
+def mx_plate_with_backplate() -> OpenSCADObject:
     """Build a segment of plate for an MX-compatible switch, with a backplate capable of holding a hot-swap socket.
     """
     return mx_plate(full_depth=True, extra_depth=1) + mx_backplate()

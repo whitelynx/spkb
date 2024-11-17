@@ -1,4 +1,7 @@
+from typing import Optional
+
 from solid2 import rotate, cube, hull, scad_render_to_file, up, left, right, forward, back
+from solid2.core.object_base import OpenSCADObject
 
 from .utils import cylinder_outer, optional
 
@@ -14,7 +17,7 @@ m2_nut_radius = 3.9 / 2
 mount_post_m2_radius = 6 / 2
 
 
-def mount_post_m2(height):
+def mount_post_m2(height) -> OpenSCADObject:
     return (
         cylinder_outer(mount_post_m2_radius, height)
         - cylinder_outer(m2_shaft_radius, height + 0.1).down(0.05)
@@ -22,7 +25,14 @@ def mount_post_m2(height):
 
 
 class BoardMount:
-    def __init__(self, board_width, board_length, board_thickness, has_connector=True, front_mounting_post_separation=10, back_mounting_post_separation=None):
+    def __init__(self,
+                 board_width: float,
+                 board_length: float,
+                 board_thickness: float,
+                 has_connector: bool = True,
+                 front_mounting_post_separation: float = 10,
+                 back_mounting_post_separation: Optional[float] = None,
+                 ):
         self.board_width = board_width
         self.board_length = board_length
         self.board_thickness = board_thickness
@@ -37,7 +47,7 @@ class BoardMount:
         # Length of the plug clearance volume
         self.plug_length = 20
 
-    def pcb_only(self, distance_from_surface):
+    def pcb_only(self, distance_from_surface: float) -> OpenSCADObject:
         return up(distance_from_surface + self.board_thickness / 2)(
             back(self.board_length / 2)(
                 cube(
@@ -47,7 +57,7 @@ class BoardMount:
             )
         )
 
-    def connector(self, distance_from_surface):
+    def connector(self, distance_from_surface: float) -> OpenSCADObject:
         """An approximation of a USB-C connector.
         """
         return optional(self.has_connector)(
@@ -71,14 +81,14 @@ class BoardMount:
             )
         )
 
-    def board_profile(self, distance_from_surface):
+    def board_profile(self, distance_from_surface: float) -> OpenSCADObject:
         return (
             self.pcb_only(distance_from_surface)
             + self.connector(distance_from_surface)
         )
         # TODO: Maybe add pin clearance!
 
-    def back_mounting_posts(self, distance_from_surface):
+    def back_mounting_posts(self, distance_from_surface: float) -> OpenSCADObject:
         mounting_post = mount_post_m2(distance_from_surface)
 
         mounting_post_shift = mount_post_m2_radius * 2
@@ -93,7 +103,7 @@ class BoardMount:
             )
         )
 
-    def front_mounting_posts(self, distance_from_surface):
+    def front_mounting_posts(self, distance_from_surface: float) -> OpenSCADObject:
         positioning_post_height = distance_from_surface + self.board_thickness + 3
         positioning_post = cube((4, 4, positioning_post_height), center=True) \
             .up(positioning_post_height / 2) \
@@ -106,13 +116,13 @@ class BoardMount:
             + right(positioning_post_shift)(positioning_post)
         ) - self.board_profile(distance_from_surface)
 
-    def mounting_posts(self, distance_from_surface):
+    def mounting_posts(self, distance_from_surface: float) -> OpenSCADObject:
         return (
             self.back_mounting_posts(distance_from_surface)
             + self.front_mounting_posts(distance_from_surface)
         )
 
-    def render(self, distance_from_surface):
+    def render(self, distance_from_surface: float) -> OpenSCADObject:
         return self.mounting_posts(distance_from_surface) - self.board_profile(
             distance_from_surface
         )

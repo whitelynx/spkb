@@ -1,4 +1,5 @@
 from solid2 import polygon, hull
+from solid2.core.object_base import OpenSCADObject
 
 from spkb.switch_plate import plate_thickness
 
@@ -10,7 +11,7 @@ sa_mid_shrink = 0.625
 sa_top_shrink = 3.125
 
 
-def sa_cap(units):
+def sa_cap(units) -> OpenSCADObject:
     """Create an "SA" keycap shape.
 
     (actually something akin to SA row 3, but with flat tops)

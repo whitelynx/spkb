@@ -1,10 +1,12 @@
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from math import pi, cos
+from typing import List, Union
 
 from solid2 import cube, cylinder
+from solid2.core.object_base import OpenSCADObject
 
 
-def fudge_radius(r, segments=16):
+def fudge_radius(r: Union[float, Sequence[float]], segments: int = 16) -> Union[float, List[float]]:
     """Adjust the given radius for the given number of segments to make it generate a circumscribed circular object.
 
     See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/undersized_circular_objects for more info.
@@ -20,7 +22,7 @@ def fudge_radius(r, segments=16):
     return [ri * fudge for ri in r] if isinstance(r, Sequence) else r * fudge
 
 
-def cylinder_outer(r, h, segments=16, center=False):
+def cylinder_outer(r: Union[float, Sequence[float]], h: float, segments: int = 16, center: bool = False) -> OpenSCADObject:
     """Create a cylinder using circumscribed polygons instead of the default inscribed polygons.
 
     See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/undersized_circular_objects for more info.
@@ -61,7 +63,7 @@ def cylinder_outer(r, h, segments=16, center=False):
 nothing = cube((1, 1, 1), center=True) - cube((2, 2, 2), center=True)
 
 
-def optional(condition):
+def optional(condition: bool) -> Callable[[OpenSCADObject], OpenSCADObject]:
     """Optionally include the wrapped part.
 
     If `condition` is truthy, the wrapped part will be returned; otherwise, spkb.utils.nothing will be returned.

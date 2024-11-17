@@ -1,4 +1,5 @@
 from solid2 import cube, rotate, up, forward, scad_render_to_file
+from solid2.core.object_base import OpenSCADObject
 
 from .switch_plate import (
     switch_plate,
@@ -18,7 +19,7 @@ wall_length = max(mount_width, mount_length) + 2 * switch_spacing
 wall_thickness = 5
 
 
-def spaced_switch_plate():
+def spaced_switch_plate() -> OpenSCADObject:
     plate_spacer = up(plate_thickness / 2)(
         forward((max(mount_width, mount_length) + switch_spacing) / 2)(
             cube((wall_length, switch_spacing, plate_thickness), center=True)
@@ -34,7 +35,7 @@ def spaced_switch_plate():
     )
 
 
-def single_tester_walls():
+def single_tester_walls() -> OpenSCADObject:
     wall = up(wall_height / 2)(
         forward((wall_length - wall_thickness) / 2)(
             cube((wall_length, wall_thickness, wall_height), center=True)
@@ -44,7 +45,7 @@ def single_tester_walls():
     return wall + rotate(90)(wall) + rotate(180)(wall) + rotate(270)(wall)
 
 
-def single_tester():
+def single_tester() -> OpenSCADObject:
     return single_tester_walls() + up(wall_height - plate_thickness)(
         spaced_switch_plate()
     )

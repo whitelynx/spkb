@@ -1,4 +1,7 @@
+from typing import Tuple
+
 from solid2 import rotate, cube, up, left, right, forward, back
+from solid2.core.object_base import OpenSCADObject
 
 from .switch_plate import (
     switch_plate,
@@ -16,7 +19,7 @@ wall_length = mount_length + 2 * switch_spacing
 wall_thickness = 3
 
 
-def spaced_switch_plate():
+def spaced_switch_plate() -> OpenSCADObject:
     plate_spacer = up(plate_thickness / 2)(
         forward((max(mount_width, mount_length) + switch_spacing) / 2)(
             cube((wall_length, switch_spacing, plate_thickness), center=True)
@@ -33,8 +36,8 @@ def spaced_switch_plate():
 
 
 def key_grid_tester_wall_dimensions(
-    length_units, width_units, wall_height, margin_length, margin_width
-):
+    length_units: int, width_units: int, wall_height: float, margin_length: float, margin_width: float
+) -> Tuple[float, float]:
     wall_length = (
         (mount_length + switch_spacing) * length_units
         + switch_spacing
@@ -48,8 +51,8 @@ def key_grid_tester_wall_dimensions(
 
 
 def key_grid_tester_walls(
-    length_units, width_units, wall_height, margin_length, margin_width
-):
+    length_units: int, width_units: int, wall_height: float, margin_length: float, margin_width: float
+) -> OpenSCADObject:
     wall_length, wall_width = key_grid_tester_wall_dimensions(
         length_units, width_units, wall_height, margin_length, margin_width
     )
@@ -68,12 +71,12 @@ def key_grid_tester_walls(
 
 
 def key_grid_tester(
-    length_units,
-    width_units,
-    wall_height=default_wall_height,
-    margin_length=0,
-    margin_width=0,
-):
+    length_units: int,
+    width_units: int,
+    wall_height: float = default_wall_height,
+    margin_length: float = 0,
+    margin_width: float = 0,
+) -> OpenSCADObject:
     x_grid_size = mount_width + switch_spacing
     y_grid_size = mount_length + switch_spacing
 

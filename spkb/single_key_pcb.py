@@ -1,4 +1,5 @@
 from solid2 import cube, cylinder, hull, mirror, rotate, up, down, left, right, forward, back, scad_render_to_file
+from solid2.core.object_base import OpenSCADObject
 
 from .switch_plate import (
     keyswitch_depth,
@@ -17,7 +18,7 @@ pcb_hole_radius = 1.7 / 2
 pcb_hole_offset = 8
 
 
-def single_key_board(simple=False):
+def single_key_board(simple: bool = False) -> OpenSCADObject:
     """Build an approximation of a single-key PCB.
 
     If `simple=True`, then just approximate the size of one of these with a rectangular prism.
