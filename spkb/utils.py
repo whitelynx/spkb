@@ -45,7 +45,7 @@ def cylinder_outer(r: Union[float, Sequence[float]], h: float, segments: int = 1
     adjusted_r = fudge_radius(r, segments)
 
     radii = {}
-    if isinstance(adjusted_r, float):
+    if isinstance(adjusted_r, (int, float)):
         radii['r'] = adjusted_r
     elif isinstance(adjusted_r, (tuple, list)):
         radii['r1'], radii['r2'] = adjusted_r
