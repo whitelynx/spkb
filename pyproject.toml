@@ -24,3 +24,16 @@ dependencies = [
 [project.urls]
 "Homepage" = "https://github.com/whitelynx/spkb"
 "Bug Tracker" = "https://github.com/whitelynx/spkb/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"pkgname" = ["py.typed"]
+
+[tool.pyright]
+include = ["spkb"]
+exclude = [
+	"**/node_modules",
+	"**/__pycache__",
+]
