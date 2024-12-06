@@ -11,13 +11,12 @@ sa_mid_shrink = 0.625
 sa_top_shrink = 3.125
 
 
-def sa_cap(units) -> OpenSCADObject:
+def sa_cap(units: float) -> OpenSCADObject:
     """Create an "SA" keycap shape.
 
     (actually something akin to SA row 3, but with flat tops)
 
     :param units: the size of the key, in key units
-    :type units: number
     """
     if units == 1:
         bl2 = sa_length / 2
