@@ -2,13 +2,9 @@ from itertools import chain
 from math import fabs
 from typing import List, Optional, Tuple
 
-from solid2 import cube, cylinder, hull, mirror, rotate, scad_render_to_file
+from solid2 import cube, hull, mirror, rotate, scad_render_to_file
 from solid2.core.object_base import OpenSCADObject
 
-from .switch_plate import (
-    keyswitch_depth,
-    plate_thickness,
-)
 from .utils import cylinder_outer
 
 Offset2D = Tuple[float, float]
@@ -124,7 +120,7 @@ class Keyswitch:
         :param wall_thickness: The thickness of the walls of the socket.
         """
         screw_hole = down(self.keyswitch_depth / 2)(
-            cylinder(r=screw_radius, h=self.keyswitch_depth + self.plate_thickness / 2, center=True, _fn=16)
+            cylinder_outer(r=screw_radius, h=self.keyswitch_depth + self.plate_thickness / 2, center=True)
         )
 
         if wall_thickness is None:
@@ -159,11 +155,11 @@ class Keyswitch:
 class MX(Keyswitch):
     """An encapsulation of all measurements and shapes related to Cherry MX-style switches.
     """
-    keyswitch_length = 14.0
+    keyswitch_length: float = 14.0
     "The length (front to back) of the keyswitch mounting hole"
-    keyswitch_width = 14.0
+    keyswitch_width: float = 14.0
     "The width (left to right) of the keyswitch mounting hole"
-    keyswitch_depth = 5.08
+    keyswitch_depth: float = 5.08
     "From the base of the switch to the mounting plate face"
 
     plate_thickness: float = 3
@@ -208,18 +204,18 @@ class MX(Keyswitch):
         return (
             cube((self.keyswitch_width + 3, self.keyswitch_length + 3, self.backplate_thickness), center=True)
             # Center post:
-            - cylinder(r=1.9939, h=self.backplate_thickness + 1, center=True, _fn=16)
+            - cylinder_outer(r=1.9939, h=self.backplate_thickness + 1, center=True)
             # Side posts:
-            - cylinder(r=0.8509, h=self.backplate_thickness + 1, center=True, _fn=16).right(5.08)
-            - cylinder(r=0.8509, h=self.backplate_thickness + 1, center=True, _fn=16).left(5.08)
+            - cylinder_outer(r=0.8509, h=self.backplate_thickness + 1, center=True).right(5.08)
+            - cylinder_outer(r=0.8509, h=self.backplate_thickness + 1, center=True).left(5.08)
             # Contacts:
-            - cylinder(r=1.5, h=self.backplate_thickness + 1, center=True, _fn=16).forward(2.54).left(3.81)
-            - cylinder(r=1.5, h=self.backplate_thickness + 1, center=True, _fn=16).forward(5.08).right(2.54)
+            - cylinder_outer(r=1.5, h=self.backplate_thickness + 1, center=True).forward(2.54).left(3.81)
+            - cylinder_outer(r=1.5, h=self.backplate_thickness + 1, center=True).forward(5.08).right(2.54)
             # LEDs (for up to 4-lead through-hole LEDs):
-            - cylinder(r=0.4953, h=self.backplate_thickness + 1, center=True, _fn=16).back(5.08).right(1.27)
-            - cylinder(r=0.4953, h=self.backplate_thickness + 1, center=True, _fn=16).back(5.08).left(1.27)
-            - cylinder(r=0.4953, h=self.backplate_thickness + 1, center=True, _fn=16).back(5.08).right(3.81)
-            - cylinder(r=0.4953, h=self.backplate_thickness + 1, center=True, _fn=16).back(5.08).left(3.81)
+            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(5.08).right(1.27)
+            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(5.08).left(1.27)
+            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(5.08).right(3.81)
+            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(5.08).left(3.81)
         ).up(self.plate_thickness - self.keyswitch_depth - self.backplate_thickness / 2)
 
     def backplate_clearance(self) -> OpenSCADObject:
@@ -241,11 +237,11 @@ class MX(Keyswitch):
 class Choc(Keyswitch):
     """An encapsulation of all measurements and shapes related to Kailh Choc-style switches.
     """
-    keyswitch_length = 14.0
+    keyswitch_length: float = 14.0
     "The length (front to back) of the keyswitch mounting hole"
-    keyswitch_width = 14.0
+    keyswitch_width: float = 14.0
     "The width (left to right) of the keyswitch mounting hole"
-    keyswitch_depth = 5.08
+    keyswitch_depth: float = 5.08
     "From the base of the switch to the mounting plate face"
 
     plate_thickness: float = 3
@@ -290,23 +286,23 @@ class Choc(Keyswitch):
         return (
             cube((self.keyswitch_width + 3, self.keyswitch_length + 3, self.backplate_thickness), center=True)
             # Center post:
-            - cylinder(r=2.5, h=self.backplate_thickness + 1, center=True, _fn=16)
+            - cylinder_outer(r=2.5, h=self.backplate_thickness + 1, center=True)
             # Side posts:
-            - cylinder(r=0.95, h=self.backplate_thickness + 1, center=True, _fn=16).right(5.5)
-            - cylinder(r=0.95, h=self.backplate_thickness + 1, center=True, _fn=16).left(5.5)
+            - cylinder_outer(r=0.95, h=self.backplate_thickness + 1, center=True).right(5.5)
+            - cylinder_outer(r=0.95, h=self.backplate_thickness + 1, center=True).left(5.5)
             # Corner post:
             - hull()(
-                cylinder(r=0.75, h=self.backplate_thickness + 1, center=True, _fn=16).back(0.25),
-                cylinder(r=0.75, h=self.backplate_thickness + 1, center=True, _fn=16).forward(0.25),
+                cylinder_outer(r=0.75, h=self.backplate_thickness + 1, center=True).back(0.25),
+                cylinder_outer(r=0.75, h=self.backplate_thickness + 1, center=True).forward(0.25),
             ).back(5.15).right(5)
             # Contacts:
-            - cylinder(r=1.5, h=self.backplate_thickness + 1, center=True, _fn=16).forward(3.8).left(5)
-            - cylinder(r=1.5, h=self.backplate_thickness + 1, center=True, _fn=16).forward(5.9)
+            - cylinder_outer(r=1.5, h=self.backplate_thickness + 1, center=True).forward(3.8).left(5)
+            - cylinder_outer(r=1.5, h=self.backplate_thickness + 1, center=True).forward(5.9)
             # LEDs (for up to 4-lead through-hole LEDs):
-            - cylinder(r=0.4953, h=self.backplate_thickness + 1, center=True, _fn=16).back(4.815).right(1.27)
-            - cylinder(r=0.4953, h=self.backplate_thickness + 1, center=True, _fn=16).back(4.815).left(1.27)
-            - cylinder(r=0.4953, h=self.backplate_thickness + 1, center=True, _fn=16).back(4.815).right(3.81)
-            - cylinder(r=0.4953, h=self.backplate_thickness + 1, center=True, _fn=16).back(4.815).left(3.81)
+            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(4.815).right(1.27)
+            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(4.815).left(1.27)
+            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(4.815).right(3.81)
+            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(4.815).left(3.81)
         ).up(self.plate_thickness - self.keyswitch_depth - self.backplate_thickness / 2)
 
     def backplate_clearance(self) -> OpenSCADObject:
