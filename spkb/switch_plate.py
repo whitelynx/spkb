@@ -57,7 +57,7 @@ def mx_plate(full_depth: bool = False, extra_depth: float = 0, wall_thickness: f
     return plate_half + mirror((0, 1, 0))(mirror((1, 0, 0))(plate_half))
 
 
-def mx_plate_with_board_mount(full_depth: bool = False, extra_depth: float = 0) -> OpenSCADObject:
+def mx_plate_with_board_mount(extra_depth: float = 0) -> OpenSCADObject:
     """Build a segment of plate for an MX-compatible switch, with mounting holes for a single-key PCB.
 
     Some compatible single-key PCBs:
