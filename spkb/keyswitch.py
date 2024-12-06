@@ -200,22 +200,26 @@ class MX(Keyswitch):
 
         You can still use this without hot-swap sockets; the holes are left at the larger size to avoid melting when
         soldering directly.
+
+        See page 10 of https://www.kailhswitch.com/Content/upload/pdf/201815927/PaleBlueSpeed.pdf?rnd=782 for standard
+        switch layout, and https://www.kailhswitch.com/Content/upload/pdf/202215927/CPG151101S11-16.pdf?rnd=494 for
+        hot-swap socket dimensions.
         """
         return (
             cube((self.keyswitch_width + 3, self.keyswitch_length + 3, self.backplate_thickness), center=True)
             # Center post:
-            - cylinder_outer(r=1.9939, h=self.backplate_thickness + 1, center=True)
+            - cylinder_outer(r=1.995, h=self.backplate_thickness + 1, center=True)
             # Side posts:
-            - cylinder_outer(r=0.8509, h=self.backplate_thickness + 1, center=True).right(5.08)
-            - cylinder_outer(r=0.8509, h=self.backplate_thickness + 1, center=True).left(5.08)
+            - cylinder_outer(r=0.85, h=self.backplate_thickness + 1, center=True).right(5.08)
+            - cylinder_outer(r=0.85, h=self.backplate_thickness + 1, center=True).left(5.08)
             # Contacts:
             - cylinder_outer(r=1.5, h=self.backplate_thickness + 1, center=True).forward(2.54).left(3.81)
             - cylinder_outer(r=1.5, h=self.backplate_thickness + 1, center=True).forward(5.08).right(2.54)
             # LEDs (for up to 4-lead through-hole LEDs):
-            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(5.08).right(1.27)
-            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(5.08).left(1.27)
-            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(5.08).right(3.81)
-            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(5.08).left(3.81)
+            - cylinder_outer(r=0.5, h=self.backplate_thickness + 1, center=True).back(5.08).right(1.27)
+            - cylinder_outer(r=0.5, h=self.backplate_thickness + 1, center=True).back(5.08).left(1.27)
+            - cylinder_outer(r=0.5, h=self.backplate_thickness + 1, center=True).back(5.08).right(3.81)
+            - cylinder_outer(r=0.5, h=self.backplate_thickness + 1, center=True).back(5.08).left(3.81)
         ).up(self.plate_thickness - self.keyswitch_depth - self.backplate_thickness / 2)
 
     def backplate_clearance(self) -> OpenSCADObject:
@@ -282,6 +286,10 @@ class Choc(Keyswitch):
 
         You can still use this without hot-swap sockets; the holes are left at the larger size to avoid melting when
         soldering directly.
+
+        See https://www.kailhswitch.com/Content/upload/pdf/201915927/CPG135001D03-3_choc-Navy.pdf?rnd=565 for standard
+        switch layout, and https://www.kailhswitch.com/Content/upload/pdf/202115927/CPG135001S30-data-sheet.pdf?rnd=903
+        for hot-swap socket dimensions.
         """
         return (
             cube((self.keyswitch_width + 3, self.keyswitch_length + 3, self.backplate_thickness), center=True)
@@ -299,10 +307,10 @@ class Choc(Keyswitch):
             - cylinder_outer(r=1.5, h=self.backplate_thickness + 1, center=True).forward(3.8).left(5)
             - cylinder_outer(r=1.5, h=self.backplate_thickness + 1, center=True).forward(5.9)
             # LEDs (for up to 4-lead through-hole LEDs):
-            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(4.815).right(1.27)
-            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(4.815).left(1.27)
-            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(4.815).right(3.81)
-            - cylinder_outer(r=0.4953, h=self.backplate_thickness + 1, center=True).back(4.815).left(3.81)
+            - cylinder_outer(r=0.5, h=self.backplate_thickness + 1, center=True).back(4.815).right(1.27)
+            - cylinder_outer(r=0.5, h=self.backplate_thickness + 1, center=True).back(4.815).left(1.27)
+            - cylinder_outer(r=0.5, h=self.backplate_thickness + 1, center=True).back(4.815).right(3.81)
+            - cylinder_outer(r=0.5, h=self.backplate_thickness + 1, center=True).back(4.815).left(3.81)
         ).up(self.plate_thickness - self.keyswitch_depth - self.backplate_thickness / 2)
 
     def backplate_clearance(self) -> OpenSCADObject:
