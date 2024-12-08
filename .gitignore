@@ -142,3 +142,7 @@ dmypy.json
 .prof
 
 # End of https://www.toptal.com/developers/gitignore/api/python
+
+
+# OpenSCAD output files
+*.scad
