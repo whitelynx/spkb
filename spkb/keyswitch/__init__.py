@@ -33,9 +33,3 @@ def mx_keyswitch() -> OpenSCADObject:
         cube(mx_midline_width, mx_midline_length, 0.1, center=True).up(3.05),
         cube(mx_topline_width, mx_topline_length, 0.1, center=True).up(mx_height_above_plate + 2.95),
     )
-
-
-# To test, use the command line: pipenv run python -m spkb.keyswitch
-if __name__ == "__main__":
-    print("Rendering mx_keyswitch() to mx_keyswitch.scad...")
-    mx_keyswitch().save_as_scad("mx_keyswitch.scad")
