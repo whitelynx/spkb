@@ -19,12 +19,12 @@ Some portions ported from Clojure, originally from [the Dactyl Keyboard][] and m
 ## Prerequisites
 
 * [Python][] version 3.11 or newer
-* [pipenv](https://pipenv.pypa.io/en/latest/)
+* [poetry](https://python-poetry.org/docs/)
 
 ## Installing dependencies
 
 ```bash
-pipenv install
+poetry install
 ```
 
 
@@ -50,15 +50,15 @@ See the sidebar of the documentation for a reference of what's available.
 You can run simple tests from some of the submodules:
 
 ```bash
-pipenv run python -m spkb.keycaps         # Renders the built-in keycap approximations
-pipenv run python -m spkb.single_key_pcb  # Renders a simple approximation of a single-key PCB
-pipenv run python -m spkb.single_tester   # Renders a single-key tester
-pipenv run python -m spkb.keyswitch.choc  # Renders a switch socket with backplate for a Kailh Choc switch
-pipenv run python -m spkb.keyswitch.mx    # Renders a switch socket with backplate for an MX-style switch
+poetry run python -m spkb.keycaps         # Renders the built-in keycap approximations
+poetry run python -m spkb.single_key_pcb  # Renders a simple approximation of a single-key PCB
+poetry run python -m spkb.single_tester   # Renders a single-key tester
+poetry run python -m spkb.keyswitch.choc  # Renders a switch socket with backplate for a Kailh Choc switch
+poetry run python -m spkb.keyswitch.mx    # Renders a switch socket with backplate for an MX-style switch
 
 # Deprecated modules
-pipenv run python -m spkb.switch_plate    # Renders a variety of keyswitch plates (sockets)
-pipenv run python -m spkb.keyswitch       # Renders a basic approximation of an MX-style switch body
+poetry run python -m spkb.switch_plate    # Renders a variety of keyswitch plates (sockets)
+poetry run python -m spkb.keyswitch       # Renders a basic approximation of an MX-style switch body
 ```
 
 
@@ -67,7 +67,7 @@ pipenv run python -m spkb.keyswitch       # Renders a basic approximation of an 
 You can view the generated API documentation locally by running [pdoc][]:
 
 ```bash
-pipenv run pdoc -n -t templates spkb/
+poetry run pdoc -n -t templates spkb
 ```
 
 [pdoc]: https://pdoc.dev/
