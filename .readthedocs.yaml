@@ -14,5 +14,5 @@ build:
       # VIRTUAL_ENV needs to be set manually for now.
       # See https://github.com/readthedocs/readthedocs.org/pull/11152/
       - VIRTUAL_ENV=$READTHEDOCS_VIRTUALENV_PATH poetry install --with docs
-  commands:
-    - pdoc -o $READTHEDOCS_OUTPUT/html -t templates -e spkb=https://github.com/whitelynx/spkb/blob/main/spkb/ spkb
+    post_build:
+      - pdoc -o $READTHEDOCS_OUTPUT/html -t templates -e spkb=https://github.com/whitelynx/spkb/blob/main/spkb/ spkb
