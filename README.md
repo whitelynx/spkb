@@ -24,12 +24,12 @@ Some portions ported from Clojure, originally from [the Dactyl Keyboard][] and m
 
 Simply install the library in your project, using your preferred package manager.
 
-[Poetry][]
+[Poetry][]:
 ```bash
 poetry add spkb
 ```
 
-[PDM](https://pdm-project.org/)
+[PDM](https://pdm-project.org/):
 ```bash
 pdm add
 ```
