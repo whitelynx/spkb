@@ -1,3 +1,7 @@
+"""Renders a single-switch tester.
+
+<span class="todo">TODO: Document or remove this module.</span>
+"""
 from solid2 import cube, rotate, up, forward, scad_render_to_file
 from solid2.core.object_base import OpenSCADObject
 
@@ -9,8 +13,6 @@ from .switch_plate import (
     mount_length,
 )
 
-
-SEGMENTS = 48
 
 switch_spacing = 10
 
@@ -51,7 +53,7 @@ def single_tester() -> OpenSCADObject:
     )
 
 
+# To test, use the command line: pipenv run python -m spkb.single_tester
 if __name__ == "__main__":
-    scad_render_to_file(
-        single_tester(), file_header=f"$fn = {SEGMENTS};",
-    )
+    print("Rendering single_tester() to single_tester.scad...")
+    single_tester().save_as_scad("single_tester.scad")

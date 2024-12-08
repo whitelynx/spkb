@@ -130,3 +130,12 @@ class BoardMount:
 
 pro_micro = BoardMount(18.3, 33.1, 1.7)
 stm32_blackpill = BoardMount(20.66, 53, 1.64, back_mounting_post_separation=11)
+
+
+# To test, use the command line: pipenv run python -m spkb.board_mount
+if __name__ == "__main__":
+    print("Rendering pro_micro to pro_micro.scad...")
+    pro_micro.save_as_scad("pro_micro.scad")
+
+    print("Rendering stm32_blackpill to stm32_blackpill.scad...")
+    stm32_blackpill.save_as_scad("stm32_blackpill.scad")

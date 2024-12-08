@@ -1,3 +1,5 @@
+"""Renderers for approximations of keycap shapes.
+"""
 from solid2 import polygon, hull
 from solid2.core.object_base import OpenSCADObject
 
@@ -91,9 +93,11 @@ def sa_cap(units: float) -> OpenSCADObject:
         raise ValueError(f"Unrecognized key size: {units} units")
 
 
+# To test, use the command line: pipenv run python -m spkb.keycaps
 if __name__ == "__main__":
+    print("Rendering sa_cap(1), sa_cap(1.5), and sa_cap(2) to keycaps.scad...")
     (
         sa_cap(1).translate((-30, 0, 0))
         + sa_cap(1.5)
         + sa_cap(2).translate((30, 0, 0))
-    ).save_as_scad()
+    ).save_as_scad("keycaps.scad")

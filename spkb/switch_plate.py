@@ -1,8 +1,10 @@
+"""Renderers for a variety of keyswitch plates (sockets)
+
+<span markdown="1" class="deprecated">Deprecated: Use classes in `spkb.keyswitch` instead.</span>
+"""
 from solid2 import cube, cylinder, hull, mirror, rotate, up, down, left, right, forward, back, scad_render_to_file
 from solid2.core.object_base import OpenSCADObject
 
-
-SEGMENTS = 48
 
 keyswitch_length = 14.0
 keyswitch_width = 14.0
@@ -21,9 +23,6 @@ mount_width = keyswitch_width + 3
 mount_length = keyswitch_length + 3
 
 cherry_backplate_clearance_distance = 3.5
-
-
-# TODO: Turn keyswitch plate functions into callable classes that also have important measurements exposed as props.
 
 
 def mx_plate(full_depth: bool = False, extra_depth: float = 0, wall_thickness: float = 1.5) -> OpenSCADObject:
@@ -116,16 +115,10 @@ switch_plate = mx_plate
 # To test, use the command line: pipenv run python -m spkb.switch_plate
 if __name__ == "__main__":
     print("Rendering mx_plate() to mx_plate.scad...")
-    scad_render_to_file(
-        mx_plate(), filename="mx_plate.scad", file_header=f"$fn = {SEGMENTS};"
-    )
+    mx_plate().save_as_scad("mx_plate.scad")
 
     print("Rendering mx_plate_with_backplate() to mx_plate_with_backplate.scad...")
-    scad_render_to_file(
-        mx_plate_with_backplate(), filename="mx_plate_with_backplate.scad", file_header=f"$fn = {SEGMENTS};"
-    )
+    mx_plate_with_backplate().save_as_scad("mx_plate_with_backplate.scad")
 
     print("Rendering mx_plate_with_board_mount() to mx_plate_with_board_mount.scad...")
-    scad_render_to_file(
-        mx_plate_with_board_mount(), filename="mx_plate_with_board_mount.scad", file_header=f"$fn = {SEGMENTS};"
-    )
+    mx_plate_with_board_mount().save_as_scad("mx_plate_with_board_mount.scad")

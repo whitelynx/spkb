@@ -1,3 +1,7 @@
+"""Build an approximation of a single-key PCB.
+
+<span class="todo">TODO: Enapsulate and document this better.</span>
+"""
 from solid2 import cube, cylinder, hull, mirror, rotate, up, down, left, right, forward, back, scad_render_to_file
 from solid2.core.object_base import OpenSCADObject
 
@@ -7,8 +11,6 @@ from .switch_plate import (
 )
 from .utils import cylinder_outer
 
-
-SEGMENTS = 48
 
 pcb_thickness = 1.57
 pcb_size = 19
@@ -52,6 +54,4 @@ def single_key_board(simple: bool = False) -> OpenSCADObject:
 # To test, use the command line: pipenv run python -m spkb.single_key_pcb
 if __name__ == "__main__":
     print("Rendering single_key_board() to single_key_board.scad...")
-    scad_render_to_file(
-        single_key_board(), filename="single_key_board.scad", file_header=f"$fn = {SEGMENTS};"
-    )
+    single_key_board().save_as_scad("single_key_board.scad")

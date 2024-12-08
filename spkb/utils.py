@@ -1,3 +1,5 @@
+"""Utility functions for building things with SolidPython2.
+"""
 from collections.abc import Callable, Sequence
 from math import pi, cos
 from typing import List, Union
@@ -46,9 +48,8 @@ def cylinder_outer(r: Union[float, Sequence[float]], h: float = 1, segments: int
     )
 
 
-"""Nothing. (a completely empty shape)
-"""
 nothing = cube((1, 1, 1), center=True) - cube((2, 2, 2), center=True)
+"Nothing. (a completely empty shape)"
 
 
 def optional(condition: bool) -> Callable[[OpenSCADObject], OpenSCADObject]:
