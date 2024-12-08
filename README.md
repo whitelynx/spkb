@@ -2,6 +2,8 @@
 
 _SolidPython-based Keyboard Builder_
 
+[![API Documentation on ReadTheDocs](https://readthedocs.org/projects/spkb/badge/?version=latest)][API docs]
+
 ![Action Shot](images/action-shot.jpg)
 
 A [SolidPython][]-based library for building custom keyboards with [Python][] and [OpenSCAD][].
@@ -20,6 +22,7 @@ Some portions ported from Clojure, originally from [the Dactyl Keyboard][] and m
 
 * [Python][] version 3.11 or newer
 * [poetry](https://python-poetry.org/docs/)
+
 
 ## Installing dependencies
 
@@ -64,12 +67,15 @@ poetry run python -m spkb.keyswitch       # Renders a basic approximation of an 
 
 ## Documentation
 
-You can view the generated API documentation locally by running [pdoc][]:
+You can view the documentation online [on ReadTheDocs][API docs].
+
+You can also view the generated API documentation locally by running [pdoc][]:
 
 ```bash
 poetry run pdoc -n -t templates spkb
 ```
 
+[API docs]: https://spkb.readthedocs.io/
 [pdoc]: https://pdoc.dev/
 
 
