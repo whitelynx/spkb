@@ -18,37 +18,66 @@ Some portions ported from Clojure, originally from [the Dactyl Keyboard][] and m
 [the Dactyl Lynx Keyboard]: https://github.com/whitelynx/dactyl-lynx-keyboard
 
 
-## Prerequisites
+## Using SPKB
 
-* [Python][] version 3.11 or newer
-* [poetry](https://python-poetry.org/docs/)
+### Installing
 
+Simply install the library in your project, using your preferred package manager.
 
-## Installing dependencies
-
+[Poetry][]
 ```bash
-poetry install
+poetry add spkb
 ```
 
+[PDM](https://pdm-project.org/)
+```bash
+pdm add
+```
 
-## Usage
+[pipenv](https://pipenv.pypa.io/):
+```bash
+pipenv install spkb
+```
 
-For simply generating interesting key testers, see the example scripts in the `examples/`
-directory.
+[Poetry]: https://python-poetry.org/
 
----
 
-In your own code, you can simply import what you need from the submodules of `spkb`:
+### Usage
+
+In your project, you can simply import what you need from the submodules of `spkb`:
 ```python
 from spkb.switch_plate import plate_thickness, mx_plate
 from spkb.board_mount import stm32_blackpill
 from spkb.keycaps import sa_double_length, sa_cap
 ```
 
-See the sidebar of the documentation for a reference of what's available.
+See the sidebar of [the documentation][API docs] for a reference of what's available.
 
 
-## Testing
+---
+
+
+## Developing SPKB
+
+### Prerequisites
+
+* [Python][] version 3.11 or newer
+* [Poetry][]
+
+### Installing dependencies
+
+```bash
+poetry install
+```
+
+
+### Usage
+
+For simply generating interesting key testers, see the example scripts in the `examples/`
+directory.
+
+
+### Running tests
 
 You can run simple tests from some of the submodules:
 
@@ -63,6 +92,9 @@ poetry run python -m spkb.keyswitch.mx    # Renders a switch socket with backpla
 poetry run python -m spkb.switch_plate    # Renders a variety of keyswitch plates (sockets)
 poetry run python -m spkb.keyswitch       # Renders a basic approximation of an MX-style switch body
 ```
+
+
+---
 
 
 ## Documentation
