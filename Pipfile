@@ -5,7 +5,9 @@ name = "pypi"
 
 [packages]
 solidpython2 = "==2.*"
+typing-extensions = "*"
 
 [dev-packages]
 flake8 = "*"
+pdoc = "*"
 pyright = "*"
