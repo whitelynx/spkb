@@ -35,21 +35,14 @@ directory.
 
 ---
 
-In your own code, you can simply import from the `spkb` module:
-```python
-import * from spkb
-```
-
-See `spkb/__init__.py` for more detail about what's exported.
-
-You can also import directly from the submodules, which is especially useful for objects that
-aren't re-exported by the top-level module:
-
+In your own code, you can simply import what you need from the submodules of `spkb`:
 ```python
 from spkb.switch_plate import plate_thickness, mx_plate
 from spkb.board_mount import stm32_blackpill
 from spkb.keycaps import sa_double_length, sa_cap
 ```
+
+See the sidebar of the documentation for a reference of what's available.
 
 
 ## Testing
@@ -57,9 +50,15 @@ from spkb.keycaps import sa_double_length, sa_cap
 You can run simple tests from some of the submodules:
 
 ```bash
-pipenv run python -m spkb.switch_plate  # Renders a variety of keyswitch plates (sockets)
-pipenv run python -m spkb.keycaps       # Renders the built-in keycap approximations
-pipenv run python -m spkb.single_tester # Renders a single-key tester
+pipenv run python -m spkb.keycaps         # Renders the built-in keycap approximations
+pipenv run python -m spkb.single_key_pcb  # Renders a simple approximation of a single-key PCB
+pipenv run python -m spkb.single_tester   # Renders a single-key tester
+pipenv run python -m spkb.keyswitch.choc  # Renders a switch socket with backplate for a Kailh Choc switch
+pipenv run python -m spkb.keyswitch.mx    # Renders a switch socket with backplate for an MX-style switch
+
+# Deprecated modules
+pipenv run python -m spkb.switch_plate    # Renders a variety of keyswitch plates (sockets)
+pipenv run python -m spkb.keyswitch       # Renders a basic approximation of an MX-style switch body
 ```
 
 
