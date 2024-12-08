@@ -62,6 +62,17 @@ pipenv run python -m spkb.keyswitch       # Renders a basic approximation of an 
 ```
 
 
+## Documentation
+
+You can view the generated API documentation locally by running [pdoc][]:
+
+```bash
+pipenv run pdoc -n -t templates spkb/
+```
+
+[pdoc]: https://pdoc.dev/
+
+
 ## Links
 
 * [parametric-key-tester](https://github.com/whitelynx/parametric-key-tester) - the original project this library was forked from
