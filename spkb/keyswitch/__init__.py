@@ -6,7 +6,7 @@ from typing_extensions import deprecated
 from solid2 import cube, hull
 from solid2.core.object_base import OpenSCADObject
 
-if not "-m" in sys.argv:
+if "-m" not in sys.argv:
     from .choc import Choc
     from .mx import MX
 

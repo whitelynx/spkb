@@ -2,7 +2,7 @@
 
 <span markdown="1" class="deprecated">Deprecated: Use classes in `spkb.keyswitch` instead.</span>
 """
-from solid2 import cube, cylinder, hull, mirror, rotate, up, down, left, right, forward, back, scad_render_to_file
+from solid2 import cube, cylinder, hull, mirror, rotate, up, down, left, right, forward, back
 from solid2.core.object_base import OpenSCADObject
 
 

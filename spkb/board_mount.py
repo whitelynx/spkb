@@ -1,6 +1,6 @@
 from typing import Optional
 
-from solid2 import rotate, cube, hull, scad_render_to_file, up, left, right, forward, back
+from solid2 import rotate, cube, hull, up, left, right, forward, back
 from solid2.core.object_base import OpenSCADObject
 
 from .utils import cylinder_outer, optional
@@ -96,10 +96,10 @@ class BoardMount:
             mounting_post_shift = mount_post_m2_radius + self.back_mounting_post_separation / 2
 
         return back(self.board_length + m2_shaft_radius + FUDGE)(
-            mount_post_m2(distance_from_surface)
+            mounting_post
             if self.back_mounting_post_separation is None else (
-                mount_post_m2(distance_from_surface).left(mounting_post_shift)
-                + mount_post_m2(distance_from_surface).right(mounting_post_shift)
+                mounting_post.left(mounting_post_shift)
+                + mounting_post.right(mounting_post_shift)
             )
         )
 

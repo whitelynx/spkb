@@ -38,7 +38,7 @@ def sa_cap(units: float) -> OpenSCADObject:
         return (
             key_cap
             .translate((0, 0, 5 + plate_thickness))
-            .color((220/255, 163/255, 163/255, 1))
+            .color((220 / 255, 163 / 255, 163 / 255, 1))
         )
 
     elif units == 2:
@@ -62,7 +62,7 @@ def sa_cap(units: float) -> OpenSCADObject:
         return (
             key_cap
             .translate((0, 0, 5 + plate_thickness))
-            .color((127/255, 159/255, 127/255, 1))
+            .color((127 / 255, 159 / 255, 127 / 255, 1))
         )
 
     elif units == 1.5:
@@ -86,7 +86,7 @@ def sa_cap(units: float) -> OpenSCADObject:
         return (
             key_cap
             .translate((0, 0, 5 + plate_thickness))
-            .color((240/255, 223/255, 175/255, 1))
+            .color((240 / 255, 223 / 255, 175 / 255, 1))
         )
 
     else:

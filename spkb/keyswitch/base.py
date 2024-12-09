@@ -2,7 +2,7 @@ from itertools import chain
 from math import fabs
 from typing import List, Optional, Tuple
 
-from solid2 import cube, hull, rotate
+from solid2 import cube, hull
 from solid2.core.object_base import OpenSCADObject
 
 from ..utils import cylinder_outer

@@ -20,7 +20,12 @@ def fudge_radius(r: Union[float, Sequence[float]], segments: int = 16) -> Union[
     return [ri * fudge for ri in r] if isinstance(r, Sequence) else r * fudge
 
 
-def cylinder_outer(r: Union[float, Sequence[float]], h: float = 1, segments: int = 16, center: bool = False) -> OpenSCADObject:
+def cylinder_outer(
+    r: Union[float, Sequence[float]],
+    h: float = 1,
+    segments: int = 16,
+    center: bool = False
+) -> OpenSCADObject:
     """Create a cylinder using circumscribed polygons instead of the default inscribed polygons.
 
     See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/undersized_circular_objects for more info.

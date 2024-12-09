@@ -2,7 +2,7 @@
 
 <span class="todo">TODO: Enapsulate and document this better.</span>
 """
-from solid2 import cube, cylinder, hull, mirror, rotate, up, down, left, right, forward, back, scad_render_to_file
+from solid2 import cube, hull
 from solid2.core.object_base import OpenSCADObject
 
 from .switch_plate import (
