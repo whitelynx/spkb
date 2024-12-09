@@ -5,9 +5,12 @@ max-line-length = 120
 doctests = True
 
 ignore =
-	E126, # continuation line over-indented for hanging indent
-	E265, # block comment should start with '# '
-	W503  # line break before binary operator
+	# continuation line over-indented for hanging indent
+	E126,
+	# block comment should start with '# '
+	E265,
+	# line break before binary operator
+	W503,
 
 exclude =
 	.git
