@@ -38,6 +38,6 @@ jobs:
     - name: Type check with pyright
       run: |
         poetry run pyright spkb
-    - name: Test with pytest
+    - name: Run module tests
       run: |
-        pytest
+        scripts/run-module-tests.sh
