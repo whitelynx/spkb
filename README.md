@@ -3,6 +3,7 @@
 _SolidPython-based Keyboard Builder_
 
 [![API Documentation on ReadTheDocs](https://readthedocs.org/projects/spkb/badge/?version=latest)][API docs]
+[![Python package](https://github.com/whitelynx/spkb/actions/workflows/python-package.yml/badge.svg)](https://github.com/whitelynx/spkb/actions/workflows/python-package.yml)
 
 ![Action Shot](images/action-shot.jpg)
 
