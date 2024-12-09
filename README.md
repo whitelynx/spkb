@@ -80,7 +80,6 @@ directory.
 ### Running tests
 
 You can run simple tests from some of the submodules:
-
 ```bash
 poetry run python -m spkb.keycaps         # Renders the built-in keycap approximations
 poetry run python -m spkb.single_key_pcb  # Renders a simple approximation of a single-key PCB
@@ -93,6 +92,11 @@ poetry run python -m spkb.switch_plate    # Renders a variety of keyswitch plate
 poetry run python -m spkb.keyswitch       # Renders a basic approximation of an MX-style switch body
 ```
 
+You can also run all module tests and check for appropriate outputs with this script:
+```bash
+scripts/run-module-tests.sh
+```
+
 
 ---
 
@@ -102,7 +106,6 @@ poetry run python -m spkb.keyswitch       # Renders a basic approximation of an 
 You can view the documentation online [on ReadTheDocs][API docs].
 
 You can also view the generated API documentation locally by running [pdoc][]:
-
 ```bash
 poetry run pdoc -n -t templates spkb
 ```
