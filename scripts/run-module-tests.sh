@@ -9,26 +9,30 @@ assert_created() {
 	fi
 }
 
-pipenv run python -m spkb.keycaps
+poetry run python -m spkb.keycaps
 assert_created keycaps.scad
 
-pipenv run python -m spkb.single_key_pcb
+poetry run python -m spkb.single_key_pcb
 assert_created single_key_board.scad
 
-pipenv run python -m spkb.single_tester
+poetry run python -m spkb.board_mount
+assert_created pro_micro.scad
+assert_created stm32_blackpill.scad
+
+poetry run python -m spkb.single_tester
 assert_created single_tester.scad
 
-pipenv run python -m spkb.keyswitch.choc
+poetry run python -m spkb.keyswitch.choc
 assert_created choc_plate_with_backplate.scad
 
-pipenv run python -m spkb.keyswitch.mx
+poetry run python -m spkb.keyswitch.mx
 assert_created mx_plate_with_backplate.scad
 
 # Deprecated modules
-pipenv run python -m spkb.switch_plate
+poetry run python -m spkb.switch_plate
 assert_created mx_plate.scad
 assert_created mx_plate_with_backplate.scad
 assert_created mx_plate_with_board_mount.scad
 
-pipenv run python -m spkb.keyswitch
+poetry run python -m spkb.keyswitch
 assert_created mx_keyswitch.scad
