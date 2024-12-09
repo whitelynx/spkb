@@ -1,6 +1,6 @@
 from itertools import chain
 from math import fabs
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 from solid2 import cube, hull, rotate
 from solid2.core.object_base import OpenSCADObject
@@ -53,7 +53,7 @@ class Keyswitch:
         self,
         full_depth: bool = False,
         extra_depth: float = 0,
-        wall_thickness: float = None
+        wall_thickness: Optional[float] = None
     ) -> OpenSCADObject:
         """Build a segment of plate for mounting this type of switch.
 
@@ -95,7 +95,7 @@ class Keyswitch:
         screw_positions: List[Offset2D],
         screw_radius: float = 0.5,
         extra_depth: float = 0,
-        wall_thickness: float = None
+        wall_thickness: Optional[float] = None
     ) -> OpenSCADObject:
         """Build a segment of plate for mounting this type of switch, with mounting holes for a single-key PCB.
 
@@ -103,8 +103,9 @@ class Keyswitch:
         :param extra_depth: Extra depth (`z` height) to add to the walls of the socket.
         :param wall_thickness: The thickness of the walls of the socket.
         """
-        screw_hole = down(self.keyswitch_depth / 2)(
+        screw_hole = (
             cylinder_outer(r=screw_radius, h=self.keyswitch_depth + self.plate_thickness / 2, center=True)
+            .down(self.keyswitch_depth / 2)
         )
 
         if wall_thickness is None:

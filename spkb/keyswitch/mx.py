@@ -79,10 +79,10 @@ class MX(Keyswitch):
         """Build a shape to subtract in order to provide clearance around the backplate of the switch.
         """
         z_offset = self.plate_thickness - self.keyswitch_depth - self.backplate_thickness
-        return forward(7.5 / 2)(
-            up(z_offset - self.backplate_clearance_distance / 2)(
-                cube((16.5, 7.5, self.backplate_clearance_distance))
-            )
+        return (
+            cube((16.5, 7.5, self.backplate_clearance_distance))
+            .up(z_offset - self.backplate_clearance_distance / 2)
+            .forward(7.5 / 2)
         )
 
     def plate_with_backplate(self) -> OpenSCADObject:
