@@ -146,7 +146,7 @@ class Keyswitch:
             )
 
             # Add an extra screw_radius outside the screw hole, and use that to determine our wall thickness.
-            wall_thickness = max_screw_offset_from_hole + screw_radius
+            wall_thickness = max_screw_offset_from_hole + 2 * screw_radius
 
         plate = self.plate(full_depth=True, wall_thickness=wall_thickness)
         for screw_x, screw_y in screw_positions:
