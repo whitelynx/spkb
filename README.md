@@ -85,6 +85,7 @@ You can run simple tests from some of the submodules:
 poetry run python -m spkb.keycaps         # Renders the built-in keycap approximations
 poetry run python -m spkb.single_key_pcb  # Renders a simple approximation of a single-key PCB
 poetry run python -m spkb.single_tester   # Renders a single-key tester
+poetry run python -m spkb.keyswitch.base  # Renders a switch socket negative, plate with board mount, and dummy switch shape
 poetry run python -m spkb.keyswitch.choc  # Renders a switch socket with backplate for a Kailh Choc switch
 poetry run python -m spkb.keyswitch.mx    # Renders a switch socket with backplate for an MX-style switch
 

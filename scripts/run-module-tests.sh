@@ -22,6 +22,11 @@ assert_created stm32_blackpill.scad
 poetry run python -m spkb.single_tester
 assert_created single_tester.scad
 
+poetry run python -m spkb.keyswitch.base
+assert_created keyswitch_mounting_socket.scad
+assert_created keyswitch_plate_with_board_mount.scad
+assert_created keyswitch_switch.scad
+
 poetry run python -m spkb.keyswitch.choc
 assert_created choc_plate_with_backplate.scad
 

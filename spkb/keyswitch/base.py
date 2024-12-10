@@ -163,3 +163,17 @@ class Keyswitch:
             cube(self.switch_topline_width, self.switch_topline_length, 0.1, center=True)
             .up(self.switch_height_above_plate + 2.95),
         )
+
+
+# To test, use the command line: pipenv run python -m spkb.keyswitch.base
+if __name__ == "__main__":
+    print("Rendering Keyswitch().mounting_socket() to keyswitch_mounting_socket.scad...")
+    Keyswitch().mounting_socket().save_as_scad("keyswitch_mounting_socket.scad")
+
+    print("Rendering Keyswitch().plate_with_board_mount(screw_positions=[(-8, -8), (8, 8)]) to "
+          "keyswitch_plate_with_board_mount.scad...")
+    Keyswitch().plate_with_board_mount(screw_positions=[(-8, -8), (8, 8)]) \
+        .save_as_scad("keyswitch_plate_with_board_mount.scad")
+
+    print("Rendering Keyswitch().switch() to keyswitch_switch.scad...")
+    Keyswitch().switch().save_as_scad("keyswitch_switch.scad")
