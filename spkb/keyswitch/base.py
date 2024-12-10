@@ -67,28 +67,13 @@ class Keyswitch:
 
         thickness = (self.keyswitch_depth if full_depth else self.plate_thickness) + extra_depth
 
-        top_wall = (
-            cube((self.keyswitch_width + wall_thickness * 2, wall_thickness, thickness), center=True)
-            .up(self.plate_thickness - thickness / 2)
-            # Notch for switch clips
-            - hull()(
-                cube((self.notch_width, self.notch_depth * 2, self.notch_height), center=True),
-                cube((self.notch_width_outer, self.notch_depth * 2, self.notch_height_outer), center=True)
-                .back(self.notch_depth),
-            )
-            .back(wall_thickness / 2)
-            .down(self.notch_plate_thickness + self.notch_height / 2 - self.plate_thickness)
-        ).forward((wall_thickness + self.keyswitch_length) / 2)
-
-        left_wall = (
-            cube((wall_thickness, self.keyswitch_length + wall_thickness * 2, thickness), center=True)
-            .up(self.plate_thickness - thickness / 2)
-            .left((wall_thickness + self.keyswitch_width) / 2)
+        return (
+            cube(
+                (self.keyswitch_width + wall_thickness * 2, self.keyswitch_length + wall_thickness * 2, thickness),
+                center=True,
+            ).down(thickness / 2)
+            - self.mounting_socket(extra_depth=extra_depth + 1)
         )
-
-        plate_half = top_wall + left_wall
-
-        return plate_half + plate_half.rotate(180, [0, 0, 1])
 
     def mounting_socket(
         self,
