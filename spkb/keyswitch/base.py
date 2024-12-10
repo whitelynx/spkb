@@ -96,7 +96,7 @@ class Keyswitch:
     ):
         """Build a socket (negative shape) for mounting this type of switch.
 
-        :param extra_depth: Extra depth (`z` height) to add to the walls of the socket.
+        :param extra_depth: Extra depth (`z` height) to add to the bottom of the walls of the socket.
         """
         # Notch for switch clips
         notch = (
