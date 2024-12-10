@@ -30,9 +30,9 @@ class Keyswitch:
     "The width of the notch for the switch's clips at the edge of the mounting hole"
     notch_depth: float = 0.5
     "The depth of the notch for the switch's clips"
-    notch_height: float = 8
+    notch_height: float = 3
     "The height of the notch for the switch's clips at the deepest part of the notch"
-    notch_height_outer: float = 9
+    notch_height_outer: float = 4
     "The height of the notch for the switch's clips at the edge of the mounting hole"
 
     wall_thickness: float = 1.5
@@ -89,6 +89,34 @@ class Keyswitch:
         plate_half = top_wall + left_wall
 
         return plate_half + plate_half.rotate(180, [0, 0, 1])
+
+    def mounting_socket(
+        self,
+        extra_depth: float = 0,
+    ):
+        """Build a socket (negative shape) for mounting this type of switch.
+
+        :param extra_depth: Extra depth (`z` height) to add to the walls of the socket.
+        """
+        # Notch for switch clips
+        notch = (
+            hull()(
+                cube((self.notch_width, self.notch_depth * 2, self.notch_height), center=True),
+                cube((self.notch_width_outer, self.notch_depth * 2, self.notch_height_outer), center=True)
+                .back(self.notch_depth),
+            )
+            .down(self.notch_plate_thickness + self.notch_height / 2)
+        ).forward(self.keyswitch_length / 2)
+
+        # Extra height above the top of the plate to ensure subtraction doesn't leave stray polygons.
+        extra_height = 1
+
+        return (
+            cube((self.keyswitch_width, self.keyswitch_length, self.keyswitch_depth + extra_height), center=True)
+            .down((self.keyswitch_depth - extra_height) / 2)
+            + notch
+            + notch.rotate(180, [0, 0, 1])
+        )
 
     def plate_with_board_mount(
         self,
