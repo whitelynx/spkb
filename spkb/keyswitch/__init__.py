@@ -7,10 +7,12 @@ from solid2 import cube, hull
 from solid2.core.object_base import OpenSCADObject
 
 if "-m" not in sys.argv:
+    from .base import Keyswitch
     from .choc import Choc
     from .mx import MX
 
     __all__ = [
+        "Keyswitch",
         "Choc",
         "MX",
         "mx_midline_width", "mx_midline_length", "mx_topline_width", "mx_topline_length", "mx_height_above_plate",
