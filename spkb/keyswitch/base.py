@@ -49,6 +49,57 @@ class Keyswitch:
     switch_height_above_plate: float = 6.2
     "The height of the switch body above the top of the plate"
 
+    def plate_size(
+        self,
+        wall_thickness: Optional[float] = None,
+    ) -> Offset2D:
+        """Get the dimensions of a `Keyswitch.plate` shape.
+
+        :param wall_thickness: The thickness of the walls of the socket.
+        """
+        if wall_thickness is None:
+            wall_thickness = self.wall_thickness
+
+        return (self.keyswitch_width + wall_thickness * 2, self.keyswitch_length + wall_thickness * 2)
+
+    def _plate_with_board_mount_wall_thickness(
+        self,
+        screw_positions: List[Offset2D],
+        screw_radius: float = 0.5,
+        wall_thickness: Optional[float] = None,
+    ) -> float:
+        """Calculate the effective wall_thickness for the given `Keyswitch.plate_with_board_mount` arguments.
+        """
+        if wall_thickness is None:
+            # Find the furthest screw center from the edges of the keyswitch mounting hole.
+            max_screw_offset_from_hole = max(
+                chain.from_iterable(
+                    (fabs(screw_x) - self.keyswitch_width / 2, fabs(screw_y) - self.keyswitch_length / 2)
+                    for screw_x, screw_y in screw_positions
+                )
+            )
+
+            # Add an extra screw_radius outside the screw hole, and use that to determine our wall thickness.
+            wall_thickness = max_screw_offset_from_hole + 2 * screw_radius
+
+        return wall_thickness
+
+    def plate_with_board_mount_size(
+        self,
+        screw_positions: List[Offset2D],
+        screw_radius: float = 0.5,
+        wall_thickness: Optional[float] = None,
+    ) -> Offset2D:
+        """Get the dimensions of a `Keyswitch.plate_with_board_mount` shape.
+
+        :param screw_positions: The positions (`(x, y)` tuples) of the screws for mounting the PCB.
+        :param screw_radius: The radius of the screw holes.
+        :param wall_thickness: The thickness of the walls of the socket.
+        """
+        return self.plate_size(
+            self._plate_with_board_mount_wall_thickness(screw_positions, screw_radius, wall_thickness)
+        )
+
     def plate(
         self,
         full_depth: bool = False,
@@ -69,7 +120,7 @@ class Keyswitch:
 
         return (
             cube(
-                (self.keyswitch_width + wall_thickness * 2, self.keyswitch_length + wall_thickness * 2, thickness),
+                self.plate_size(wall_thickness) + (thickness, ),
                 center=True,
             ).down(thickness / 2)
             - self.mounting_socket(extra_depth=extra_depth + 1)
@@ -89,8 +140,7 @@ class Keyswitch:
                 cube((self.notch_width, self.notch_depth * 2, self.notch_height), center=True),
                 cube((self.notch_width_outer, self.notch_depth * 2, self.notch_height_outer), center=True)
                 .back(self.notch_depth),
-            )
-            .down(self.notch_plate_thickness + self.notch_height / 2)
+            ).down(self.notch_plate_thickness + self.notch_height / 2)
         ).forward(self.keyswitch_length / 2)
 
         # Extra height above the top of the plate to ensure subtraction doesn't leave stray polygons.
@@ -110,30 +160,21 @@ class Keyswitch:
         screw_positions: List[Offset2D],
         screw_radius: float = 0.5,
         extra_depth: float = 0,
-        wall_thickness: Optional[float] = None
+        wall_thickness: Optional[float] = None,
     ) -> OpenSCADObject:
         """Build a segment of plate for mounting this type of switch, with mounting holes for a single-key PCB.
 
         :param screw_positions: The positions (`(x, y)` tuples) of the screws for mounting the PCB.
+        :param screw_radius: The radius of the screw holes.
         :param extra_depth: Extra depth (`z` height) to add to the walls of the socket.
         :param wall_thickness: The thickness of the walls of the socket.
         """
         screw_hole = (
             cylinder_outer(r=screw_radius, h=self.keyswitch_depth + self.plate_thickness / 2, center=True)
-            .down(self.keyswitch_depth / 2)
+            .down(self.keyswitch_depth / 2 + self.plate_thickness)
         )
 
-        if wall_thickness is None:
-            # Find the furthest screw center from the edges of the keyswitch mounting hole.
-            max_screw_offset_from_hole = max(
-                chain.from_iterable(
-                    (fabs(screw_x) - self.keyswitch_width / 2, fabs(screw_y) - self.keyswitch_length / 2)
-                    for screw_x, screw_y in screw_positions
-                )
-            )
-
-            # Add an extra screw_radius outside the screw hole, and use that to determine our wall thickness.
-            wall_thickness = max_screw_offset_from_hole + 2 * screw_radius
+        wall_thickness = self._plate_with_board_mount_wall_thickness(screw_positions, screw_radius, wall_thickness)
 
         plate = self.plate(full_depth=True, wall_thickness=wall_thickness)
         for screw_x, screw_y in screw_positions:
