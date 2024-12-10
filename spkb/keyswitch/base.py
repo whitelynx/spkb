@@ -112,8 +112,10 @@ class Keyswitch:
         extra_height = 1
 
         return (
-            cube((self.keyswitch_width, self.keyswitch_length, self.keyswitch_depth + extra_height), center=True)
-            .down((self.keyswitch_depth - extra_height) / 2)
+            cube(
+                (self.keyswitch_width, self.keyswitch_length, self.keyswitch_depth + extra_height + extra_depth),
+                center=True
+            ).down((self.keyswitch_depth - extra_height) / 2)
             + notch
             + notch.rotate(180, [0, 0, 1])
         )
