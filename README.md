@@ -55,6 +55,15 @@ from spkb.keycaps import sa_double_length, sa_cap
 See the sidebar of [the documentation][API docs] for a reference of what's available.
 
 
+#### Examples
+
+See the example scripts in the `examples/` directory. You can run them by setting `PYTHONPATH` to include the current
+directory:
+```bash
+env PYTHONPATH=$PWD poetry run python examples/stm32_blackpill_mount.py
+```
+
+
 ---
 
 
