@@ -2,6 +2,8 @@
 
 <span markdown="1" class="deprecated">Deprecated: Use classes in `spkb.keyswitch` instead.</span>
 """
+from typing_extensions import deprecated
+
 from solid2 import cube, cylinder, hull, mirror, rotate, up, down, left, right, forward, back
 from solid2.core.object_base import OpenSCADObject
 
@@ -25,6 +27,7 @@ mount_length = keyswitch_length + 3
 cherry_backplate_clearance_distance = 3.5
 
 
+@deprecated("Use spkb.keyswitch.MX().plate() instead")
 def mx_plate(full_depth: bool = False, extra_depth: float = 0, wall_thickness: float = 1.5) -> OpenSCADObject:
     """Build a segment of plate for an MX-compatible switch.
     """
@@ -56,6 +59,7 @@ def mx_plate(full_depth: bool = False, extra_depth: float = 0, wall_thickness: f
     return plate_half + mirror((0, 1, 0))(mirror((1, 0, 0))(plate_half))
 
 
+@deprecated("Use spkb.keyswitch.MX().plate_with_board_mount() instead")
 def mx_plate_with_board_mount(extra_depth: float = 0) -> OpenSCADObject:
     """Build a segment of plate for an MX-compatible switch, with mounting holes for a single-key PCB.
 
@@ -76,6 +80,7 @@ def mx_plate_with_board_mount(extra_depth: float = 0) -> OpenSCADObject:
     )
 
 
+@deprecated("See spkb.keyswitch.MX")
 def mx_backplate() -> OpenSCADObject:
     return up(plate_thickness - keyswitch_depth - backplate_thickness / 2)(
         rotate(backplate_orientation, [0, 0, 1])(
@@ -93,6 +98,7 @@ def mx_backplate() -> OpenSCADObject:
     )
 
 
+@deprecated("Use spkb.keyswitch.MX().backplate_clearance() instead")
 def mx_backplate_clearance() -> OpenSCADObject:
     return back(-7.5 / 2)(
         up(plate_thickness - keyswitch_depth - backplate_thickness - cherry_backplate_clearance_distance / 2)(
@@ -103,6 +109,7 @@ def mx_backplate_clearance() -> OpenSCADObject:
     )
 
 
+@deprecated("Use spkb.keyswitch.MX().plate_with_backplate() instead")
 def mx_plate_with_backplate() -> OpenSCADObject:
     """Build a segment of plate for an MX-compatible switch, with a backplate capable of holding a hot-swap socket.
     """
