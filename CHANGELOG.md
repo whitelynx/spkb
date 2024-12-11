@@ -17,8 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Changed `spkb.keysitch` to treat `z == 0` as the top surface of the plate,
+- Changed `spkb.keyswitch` to treat `z == 0` as the top surface of the plate,
   instead of having it protrude above the ground plane.
+
+### Deprecated
+
+- `spkb.switch_plate` - use `spkb.keyswitch.Keyswitch` subclasses instead.
 
 
 ## [0.1.0] - 2024-12-09
