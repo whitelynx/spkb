@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `scripts/run-module-tests.sh` for running in-module tests
 - Continuous integration via GitHub Actions
 - `Keyswitch.mounting_socket()` for rendering a negative shape for switch mounting holes
+- `Keyswitch.plate_size()` and `Keyswitch.plate_with_board_mount_size()` for getting plate measurements
 
 ### Changed
 
