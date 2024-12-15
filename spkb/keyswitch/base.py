@@ -174,8 +174,8 @@ class Keyswitch:
         """
         return (
             cylinder_outer(r=screw.radius, h=self.keyswitch_depth + self.plate_thickness / 2, center=True)
-            .forward(screw.x)
-            .right(screw.y)
+            .right(screw.x)
+            .forward(screw.y)
             .down(self.keyswitch_depth / 2 + self.plate_thickness)
         )
 
