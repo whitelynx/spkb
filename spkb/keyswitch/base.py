@@ -34,8 +34,8 @@ class Keyswitch:
     notch_height_outer: float = 4
     "The height of the notch for the switch's clips at the edge of the mounting hole"
 
-    wall_thickness: float = 1.5
-    "The thickness of the mounting hole walls"
+    default_wall_thickness: float = 1.5
+    "The default thickness of the mounting hole walls"
 
     switch_midline_width: float = 13.95
     "The width (left to right) of the switch at its midline (at the top of the plate)"
@@ -75,20 +75,21 @@ class Keyswitch:
     ) -> Offset2D:
         """Get the dimensions of a `Keyswitch.plate` shape.
 
-        :param wall_thickness: The thickness of the walls of the socket. Omit to calculate from the defined wall
+        :param wall_thickness: The thickness of the walls of the socket. Omit to calculate from the default wall
         thickness and screw hole definitions.
         """
         if wall_thickness is None:
-            wall_thickness = self._calc_wall_thickness()
+            wall_thickness = self.wall_thickness
 
         return Offset2D(self.keyswitch_width + wall_thickness * 2, self.keyswitch_length + wall_thickness * 2)
 
-    def _calc_wall_thickness(self) -> float:
+    @property
+    def wall_thickness(self) -> float:
         """Calculate the effective `wall_thickness` for this `Keyswitch` definition.
         """
         if self.screws is None:
             # No screws are defined; use the defined self.wall_thickness.
-            return self.wall_thickness
+            return self.default_wall_thickness
 
         # Find the furthest screw hole edge from from the edges of the keyswitch mounting hole.
         max_screw_offset_from_hole = max(
@@ -101,8 +102,8 @@ class Keyswitch:
             )
         )
 
-        # Add self.wall_thickness outside the screw hole, and use that to determine our effective wall thickness.
-        return max_screw_offset_from_hole + self.wall_thickness
+        # Add default_wall_thickness outside the screw hole, and use that to determine our effective wall thickness.
+        return max_screw_offset_from_hole + self.default_wall_thickness
 
     def plate(
         self,
@@ -115,7 +116,8 @@ class Keyswitch:
         :param full_depth: If True, extend the walls of the socket to the full depth of the switch; otherwise, only
         extend to the plate thickness. If `self.screws` is set, defaults to full depth.
         :param extra_depth: Extra depth (`z` height) to add to the walls of the socket.
-        :param wall_thickness: The thickness of the walls of the socket.
+        :param wall_thickness: The thickness of the walls of the socket. Omit to calculate from the default wall
+        thickness and screw hole definitions.
         """
         if wall_thickness is None:
             wall_thickness = self.wall_thickness
