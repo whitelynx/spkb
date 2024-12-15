@@ -149,13 +149,11 @@ class Keyswitch:
         :param extra_depth: Extra depth (`z` height) to add to the bottom of the walls of the socket.
         """
         # Notch for switch clips
-        notch = (
-            hull()(
-                cube((self.notch_width, self.notch_depth * 2, self.notch_height), center=True),
-                cube((self.notch_width_outer, self.notch_depth * 2, self.notch_height_outer), center=True)
-                .back(self.notch_depth),
-            ).down(self.notch_plate_thickness + self.notch_height / 2)
-        ).forward(self.keyswitch_length / 2)
+        notch = hull()(
+            cube((self.notch_width, self.notch_depth * 2, self.notch_height), center=True),
+            cube((self.notch_width_outer, self.notch_depth * 2, self.notch_height_outer), center=True)
+            .back(self.notch_depth),
+        ).translate((0, self.keyswitch_length / 2, -self.notch_plate_thickness - self.notch_height / 2))
 
         # Extra height above the top of the plate to ensure subtraction doesn't leave stray polygons.
         extra_height = 1
@@ -174,9 +172,7 @@ class Keyswitch:
         """
         return (
             cylinder_outer(r=screw.radius, h=self.keyswitch_depth + self.plate_thickness / 2, center=True)
-            .right(screw.x)
-            .forward(screw.y)
-            .down(self.keyswitch_depth / 2 + self.plate_thickness)
+            .translate((screw.x, screw.y, -self.keyswitch_depth / 2 - self.plate_thickness))
         )
 
     def switch(self) -> OpenSCADObject:
