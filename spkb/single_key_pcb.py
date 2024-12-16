@@ -52,7 +52,7 @@ def single_key_board(simple: bool = False, extra_spacing: float = 0) -> OpenSCAD
             - pcb_hole.right(pcb_hole_offset).back(pcb_hole_offset)
         )
 
-    return pcb.down(pcb_thickness / 2 + keyswitch_depth + extra_spacing)
+    return pcb.down(pcb_thickness / 2 + keyswitch_depth + extra_spacing / 2)
 
 
 # To test, use the command line: pipenv run python -m spkb.single_key_pcb
