@@ -48,7 +48,7 @@ def single_key_board(simple: bool = False) -> OpenSCADObject:
             - pcb_hole.right(pcb_hole_offset).back(pcb_hole_offset)
         )
 
-    return pcb.down(pcb_thickness / 2 - plate_thickness + keyswitch_depth)
+    return pcb.down(pcb_thickness / 2 + keyswitch_depth)
 
 
 # To test, use the command line: pipenv run python -m spkb.single_key_pcb
