@@ -34,7 +34,7 @@ class Choc(Keyswitch):
 
     backplate_clearance_distance: float = 3.5
     "Depth to clear behind the backplate"
-    wall_thickness: float = 1.5
+    default_wall_thickness: float = 1.5
     "The thickness of the mounting hole walls"
 
     switch_midline_width: float = 15
