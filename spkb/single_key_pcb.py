@@ -20,17 +20,21 @@ pcb_hole_radius = 1.7 / 2
 pcb_hole_offset = 8
 
 
-def single_key_board(simple: bool = False) -> OpenSCADObject:
+def single_key_board(simple: bool = False, extra_spacing: float = 0) -> OpenSCADObject:
     """Build an approximation of a single-key PCB.
 
-    If `simple=True`, then just approximate the size of one of these with a rectangular prism.
+    :param simple: If `True`, then just approximate the size of one of these with a rectangular prism.
+    :param extra_spacing: Add this amount of size under and around the edges of the board, when `simple=True`.
 
     Some compatible single-key PCBs:
     - https://www.flux.ai/whitelynx/mx-single-keyswitch-hot-swap-board
     - https://www.flux.ai/whitelynx/choc-single-keyswitch-hot-swap-board
     """
     if simple:
-        pcb = cube((pcb_size, pcb_size, pcb_thickness), center=True)
+        pcb = cube(
+            (pcb_size + extra_spacing * 2, pcb_size + extra_spacing * 2, pcb_thickness + extra_spacing),
+            center=True,
+        )
     else:
         pcb_corner = cylinder_outer(r=pcb_corner_radius, h=pcb_thickness, center=True)
         pcb_hole = cylinder_outer(r=pcb_hole_radius, h=pcb_thickness * 2, center=True)
@@ -48,7 +52,7 @@ def single_key_board(simple: bool = False) -> OpenSCADObject:
             - pcb_hole.right(pcb_hole_offset).back(pcb_hole_offset)
         )
 
-    return pcb.down(pcb_thickness / 2 + keyswitch_depth)
+    return pcb.down(pcb_thickness / 2 + keyswitch_depth + extra_spacing)
 
 
 # To test, use the command line: pipenv run python -m spkb.single_key_pcb
