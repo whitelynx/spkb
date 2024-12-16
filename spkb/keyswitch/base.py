@@ -53,11 +53,25 @@ class Keyswitch:
     backplate_holes: List[HoleDef] = []
     "The positions and radii of any holes in the backplate (for positioning posts, contacts, LED leads, etc.)"
 
+    board_size: Optional[Offset2D] = None
+    "The size of the single-keyswitch PCB to be attached to the bottom of the switch mount"
     screws: Optional[List[HoleDef]] = None
     "The positions and radii of any mounting screw holes on the bottom of the switch mount"
 
     def __init__(self, with_backplate=False):
         self.with_backplate = with_backplate
+
+    @classmethod
+    def with_board(cls, board_size: Offset2D, *screws: List[HoleDef]):
+        """Return a copy of this `Keyswitch` with the given single-switch PCB dimensions.
+
+        :param board_size: The X and Y dimensions of the single-switch PCB to be attached to the bottom of the switch
+        mount.
+        :param screws: The positions and radii of any mounting screw holes on the bottom of the switch mount.
+        """
+        keyswitch = cls()
+        keyswitch.screws = screws
+        return keyswitch
 
     @classmethod
     def with_screws(cls, *screws: List[HoleDef]):
@@ -87,6 +101,12 @@ class Keyswitch:
     def wall_thickness(self) -> float:
         """Calculate the effective `wall_thickness` for this `Keyswitch` definition.
         """
+        if self.board_size is not None:
+            return max(
+                self.board_size.x - self.keyswitch_width,
+                self.board_size.y - self.keyswitch_length,
+            ) / 2
+
         if self.screws is None:
             # No screws are defined; use the defined self.wall_thickness.
             return self.default_wall_thickness
@@ -95,8 +115,8 @@ class Keyswitch:
         max_screw_offset_from_hole = max(
             chain.from_iterable(
                 (
-                    fabs(screw_def.x) - self.keyswitch_width / 2 + screw_def.radius,
-                    fabs(screw_def.y) - self.keyswitch_length / 2 + screw_def.radius,
+                    fabs(screw_def.x) + screw_def.radius - self.keyswitch_width / 2,
+                    fabs(screw_def.y) + screw_def.radius - self.keyswitch_length / 2,
                 )
                 for screw_def in self.screws
             )
