@@ -1,3 +1,4 @@
+from collections.abc import Sequence
 from itertools import chain
 from math import fabs
 from typing import List, Optional
@@ -50,19 +51,19 @@ class Keyswitch:
 
     with_backplate: bool = False
     "Whether to render a backplate (True) or not when rendering the mounting hole shape"
-    backplate_holes: List[HoleDef] = []
+    backplate_holes: Sequence[HoleDef] = []
     "The positions and radii of any holes in the backplate (for positioning posts, contacts, LED leads, etc.)"
 
     board_size: Optional[Offset2D] = None
     "The size of the single-keyswitch PCB to be attached to the bottom of the switch mount"
-    screws: Optional[List[HoleDef]] = None
+    screws: Optional[Sequence[HoleDef]] = None
     "The positions and radii of any mounting screw holes on the bottom of the switch mount"
 
     def __init__(self, with_backplate=False):
         self.with_backplate = with_backplate
 
     @classmethod
-    def with_board(cls, board_size: Offset2D, *screws: List[HoleDef]):
+    def with_board(cls, board_size: Offset2D, *screws: HoleDef):
         """Return a copy of this `Keyswitch` with the given single-switch PCB dimensions.
 
         :param board_size: The X and Y dimensions of the single-switch PCB to be attached to the bottom of the switch
@@ -74,7 +75,7 @@ class Keyswitch:
         return keyswitch
 
     @classmethod
-    def with_screws(cls, *screws: List[HoleDef]):
+    def with_screws(cls, *screws: HoleDef):
         """Return a copy of this `Keyswitch` with the given screw holes.
 
         :param screws: The positions and radii of any mounting screw holes on the bottom of the switch mount.
