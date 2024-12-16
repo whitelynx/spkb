@@ -5,10 +5,7 @@
 from solid2 import cube, hull
 from solid2.core.object_base import OpenSCADObject
 
-from .switch_plate import (
-    keyswitch_depth,
-    plate_thickness,
-)
+from .switch_plate import keyswitch_depth
 from .utils import cylinder_outer
 
 

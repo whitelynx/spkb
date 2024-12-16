@@ -1,6 +1,3 @@
-from typing import Tuple
-
-
 class HoleDef:
     def __init__(self, x: float, y: float, radius: float):
         self.x = x
