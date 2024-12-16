@@ -3,8 +3,6 @@
 from solid2 import polygon, hull
 from solid2.core.object_base import OpenSCADObject
 
-from spkb.switch_plate import plate_thickness
-
 
 sa_length = 18.25
 sa_1_5_length = 28
@@ -37,7 +35,7 @@ def sa_cap(units: float) -> OpenSCADObject:
         )
         return (
             key_cap
-            .translate((0, 0, 5 + plate_thickness))
+            .translate((0, 0, 5))
             .color((220 / 255, 163 / 255, 163 / 255, 1))
         )
 
@@ -61,7 +59,7 @@ def sa_cap(units: float) -> OpenSCADObject:
         )
         return (
             key_cap
-            .translate((0, 0, 5 + plate_thickness))
+            .translate((0, 0, 5))
             .color((127 / 255, 159 / 255, 127 / 255, 1))
         )
 
@@ -85,7 +83,7 @@ def sa_cap(units: float) -> OpenSCADObject:
         )
         return (
             key_cap
-            .translate((0, 0, 5 + plate_thickness))
+            .translate((0, 0, 5))
             .color((240 / 255, 223 / 255, 175 / 255, 1))
         )
 

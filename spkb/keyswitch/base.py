@@ -200,9 +200,9 @@ class Keyswitch:
         """
         return hull()(
             cube(self.switch_midline_width, self.switch_midline_length, 0.1, center=True)
-            .up(3.05),
+            .up(0.05),
             cube(self.switch_topline_width, self.switch_topline_length, 0.1, center=True)
-            .up(self.switch_height_above_plate + 2.95),
+            .up(self.switch_height_above_plate - 0.05),
         )
 
 
